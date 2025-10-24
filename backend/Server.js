@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import validacionUser from './src/components/AuthValidation.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
 
 
 dotenv.config();
@@ -15,11 +16,12 @@ const prisma = new PrismaClient();
 
 //Middleware
 app.use(express.json());
+app.use(cookieParser());
 
 
 // Definicion de endpoints
 
-app.get('/', (req, res) => {
+app.get('/', (res) => {
     res.send('Welcome to ElGymApp Backend!');
 });
 
@@ -74,8 +76,6 @@ app.post('/register', validacionUser, async (req, res) => {
     }
 });
 
-
-
 app.post('/login', validacionUser, async (req, res) => {
 
     const { email, password } = req.body;  // Lo recoge de los inputs del cliente
@@ -95,8 +95,13 @@ app.post('/login', validacionUser, async (req, res) => {
             return res.status(401).json({ message: `La contraseña no coincide`, error: 'Contraseña incorrecta' });
         }
 
-        console.log('Login exitoso para el usuario:', user);
-        res.json(`El usuario ${user.name} ha iniciado sesión con éxito`);
+
+        const payload = { username: user.name, email: user.email, id: user.id }; // Datos que quiero guardar en el token
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' }); // Firmo el token con la clave secreta y le doy una duracion de 2 horas
+
+
+        console.log('Login exitoso para el usuario:', user, token);
+        res.cookie('authToken', token, { httpOnly: true }).json(`El usuario ${user.name} ha iniciado sesión con éxito`);
     }
     catch (error) {
 
@@ -107,6 +112,64 @@ app.post('/login', validacionUser, async (req, res) => {
 
 });
 
+app.post('/logout', async (req, res) => {
+
+    const token = req.cookies.authToken;
+
+    if (!token) {
+        return res.status(400).json({ error: 'No tiene autorización de acceso' }); // Si no hay token en las cookies, no tiene autorizacion
+    }
+
+    res.clearCookie('authToken').json({ message: 'Cierre de sesión exitoso' });// Elimino la cookie del token en el cliente
+
+
+});
+
+app.delete('/deleteOne', async (req, res) => {  // Este lo quiero usar en desarrollo para borrar usuarios de prueba
+
+    const { id } = req.body;
+
+    const user = await prisma.user.findUnique({ where: { id } }); // Busco el usuario antes de borrarlo
+    try {
+        if (!id) {
+            console.log('El id es necesario para eliminar el ususario'); //Aqui me aviso en el servidor.  // Aqui hay un error porque este bloque nunca lo lee
+            return res.status(400).json({ error: 'El id es necesario para eliminar el ususario' }); // Aqui le aviso al cliente
+        }
+
+        const deletedUser = await prisma.user.delete({ where: { id } });
+        console.log('Usuario eliminado con exito:', deletedUser); //Aqui me aviso en el servidor
+        res.json({ message: `Usuario ${deletedUser.name} eliminado con éxito`, user: deletedUser });// Aqui le aviso al cliente
+
+
+
+    } catch (error) {
+
+        console.error('Error eliminando usuario:', error);
+        res.status(500).json({ error: 'Internal server error' });// Aqui le aviso al cliente
+
+    }
+
+
+
+});
+
+
+app.delete('/deleteAll', async (req, res) => { // Este lo quiero usar en desarrollo para borrar todos los usuarios de prueba
+
+    try {
+
+        const user = await prisma.user.deleteMany();
+        console.log('Todos los usuarios han sido eliminados con exito');
+        res.json({ message: 'Todos los usuarios han sido eliminados con exito' });
+    }
+
+
+    catch (error) {
+        console.error('Error eliminando usuarios:', error);
+        res.status(500).json({ error: 'Internal server error' })
+
+    }
+});
 
 
 app.listen(PORT, () => {
