@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import validacionUser from './src/components/AuthValidation.js';
 import handleClase from './src/components/ClaseController.js';
+import apuntarse from './src/components/Apuntarse.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
@@ -225,6 +226,28 @@ app.put('/edit-class/:id', async (req, res) => {
     }
 
 
+});
+
+
+app.post('/apuntarse-clase', async (req, res) => {
+    console.log('Entrando en apuntarse a una clase');
+
+    const { user, id_Clase } = req.body;
+
+    try {
+        const resultado = await apuntarse.apuntarseAunaClase(user, id_Clase);
+
+        // Devuelve la respuesta al cliente
+        return res.status(200).json(resultado);
+
+    } catch (error) {
+        console.error('Error apuntándose a la clase:', error.message);
+
+        return res.status(400).json({
+            message: 'Se ha producido un error al apuntarse a la clase',
+            error: error.message
+        });
+    }
 });
 
 

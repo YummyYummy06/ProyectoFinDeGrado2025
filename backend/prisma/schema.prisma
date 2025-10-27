@@ -27,11 +27,13 @@ model Clase {
 }
 
 model User_Clase {
-  id_User  String   @db.Uuid
-  id_Clase String   @db.Uuid
-  time     DateTime @db.Timestamp(6)
-  Clase    Clase    @relation(fields: [id_Clase], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  User     User     @relation(fields: [id_User], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id_User   String   @db.Uuid
+  id_Clase  String   @db.Uuid
+  time      DateTime @db.Timestamp(6)
+  email     String
+  className String
+  Clase     Clase    @relation(fields: [id_Clase], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User      User     @relation(fields: [id_User], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([id_User, id_Clase])
 }
