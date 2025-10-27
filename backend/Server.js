@@ -60,6 +60,7 @@ app.post('/user-register', validacionUser, async (req, res) => {
 
         const newUser = await prisma.user.create({
             data: {
+
                 name: username,
                 email,
                 password: hasshedPassword
@@ -209,10 +210,7 @@ app.post('/create-class', async (req, res) => {
 
 });
 
-app.post('/edit-class', async (req, res) => {
-
-
-    const { id, nombre, fecha, horarioComienzo, horarioTermine, aforo } = req.body;
+app.put('/edit-class/:id', async (req, res) => {
 
 
     try {

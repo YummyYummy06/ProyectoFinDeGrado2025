@@ -50,7 +50,7 @@ const crearClase = async (req, res) => {
 const editarClase = async (req, res) => {
     console.log('Entrando en editarClase');
 
-    const id = req.params;
+    const { id } = req.params;
     const { nombre, fecha, horarioComienzo, horarioTermine, aforo } = req.body;
 
     try {
