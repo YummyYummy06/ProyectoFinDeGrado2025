@@ -2,9 +2,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import validacionUser from './src/components/AuthValidation.js';
+import handleCrearClase from './src/components/Clase.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
+
 
 
 dotenv.config();
@@ -169,6 +171,35 @@ app.delete('/deleteAll', async (req, res) => { // Este lo quiero usar en desarro
         res.status(500).json({ error: 'Internal server error' })
 
     }
+});
+
+
+app.post('/create-class', async (req, res) => {
+
+
+    const { nombre, fecha, horarioComienzo, horarioTermine, aforo } = req.body;
+
+
+    try {
+
+        if (!nombre || !fecha || !horarioComienzo || !horarioTermine || !aforo) {
+            console.error('Faltan campos por rellenar', error)
+            return res.status(400).json({ error: 'Faltan campos por rellenar' });
+        }
+
+        return handleCrearClase(req, res);
+
+    } catch (error) {
+        console.error('Se ha producido un error inesperado creando una clase');
+        res.status(400).json('Se ha producido un error al crear una clase');
+    }
+
+});
+
+
+
+app.post('/edit-class', async (req, res) => {
+
 });
 
 

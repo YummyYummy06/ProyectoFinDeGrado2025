@@ -9,8 +9,29 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @unique @default(autoincrement()) @db.SmallInt
-  name     String
-  email    String @unique
-  password String
+  id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  email      String
+  password   String
+  User_Clase User_Clase[]
+}
+
+model Clase {
+  id         String       @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  date       DateTime     @db.Date
+  startTime  DateTime     @db.Time(6)
+  endTime    DateTime     @db.Time(6)
+  aforo      Int?         @default(10) @db.SmallInt
+  User_Clase User_Clase[]
+}
+
+model User_Clase {
+  id_User  String   @db.Uuid
+  id_Clase String   @db.Uuid
+  time     DateTime @db.Timestamp(6)
+  Clase    Clase    @relation(fields: [id_Clase], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User     User     @relation(fields: [id_User], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id_User, id_Clase])
 }
