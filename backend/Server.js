@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import validacionUser from './src/components/AuthValidation.js';
-import handleCrearClase from './src/components/Clase.js';
+import handleClase from './src/components/ClaseController.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
@@ -28,7 +28,7 @@ app.get('/', (res) => {
 });
 
 
-app.get('/users', async (req, res) => {
+app.get('/get-users', async (req, res) => {
     try {
 
         const users = await prisma.user.findMany(); // El mapeo lo hace en letra minuscula, este es el nombre de la tabla en el modelo en schema.prisma
@@ -41,7 +41,7 @@ app.get('/users', async (req, res) => {
 
 });
 
-app.post('/register', validacionUser, async (req, res) => {
+app.post('/user-register', validacionUser, async (req, res) => {
 
     const { username, email, password } = req.body; // El req.body es lo que me envia el cliente en los inputs
 
@@ -78,7 +78,7 @@ app.post('/register', validacionUser, async (req, res) => {
     }
 });
 
-app.post('/login', validacionUser, async (req, res) => {
+app.post('/user-login', validacionUser, async (req, res) => {
 
     const { email, password } = req.body;  // Lo recoge de los inputs del cliente
 
@@ -114,7 +114,7 @@ app.post('/login', validacionUser, async (req, res) => {
 
 });
 
-app.post('/logout', async (req, res) => {
+app.post('/user-logout', async (req, res) => {
 
     const token = req.cookies.authToken;
 
@@ -127,7 +127,7 @@ app.post('/logout', async (req, res) => {
 
 });
 
-app.delete('/deleteOne', async (req, res) => {  // Este lo quiero usar en desarrollo para borrar usuarios de prueba
+app.delete('/user-delete-one', async (req, res) => {  // Este lo quiero usar en desarrollo para borrar usuarios de prueba
 
     const { id } = req.body;
 
@@ -156,7 +156,7 @@ app.delete('/deleteOne', async (req, res) => {  // Este lo quiero usar en desarr
 });
 
 
-app.delete('/deleteAll', async (req, res) => { // Este lo quiero usar en desarrollo para borrar todos los usuarios de prueba
+app.delete('/user-delete-all', async (req, res) => { // Este lo quiero usar en desarrollo para borrar todos los usuarios de prueba
 
     try {
 
@@ -173,6 +173,19 @@ app.delete('/deleteAll', async (req, res) => { // Este lo quiero usar en desarro
     }
 });
 
+app.get('/get-class', async (req, res) => {
+    console.log('Entrando en get-class')
+    try {
+
+        const clases = await prisma.clase.findMany();
+        res.json(clases);
+
+    }
+    catch (error) {
+        console.errror('Ha habido un error al obtener el listado de clases', error)
+        res.status(500).json({ message: 'Ha habido un error al obtener el listado de clases', error })
+    }
+});
 
 app.post('/create-class', async (req, res) => {
 
@@ -187,7 +200,7 @@ app.post('/create-class', async (req, res) => {
             return res.status(400).json({ error: 'Faltan campos por rellenar' });
         }
 
-        return handleCrearClase(req, res);
+        return handleClase.crearClase(req, res);
 
     } catch (error) {
         console.error('Se ha producido un error inesperado creando una clase');
@@ -196,9 +209,23 @@ app.post('/create-class', async (req, res) => {
 
 });
 
-
-
 app.post('/edit-class', async (req, res) => {
+
+
+    const { id, nombre, fecha, horarioComienzo, horarioTermine, aforo } = req.body;
+
+
+    try {
+
+        return handleClase.editarClase(req, res);
+
+    } catch (error) {
+
+        console.error('Se ha producido un error inesperado editando una clase');
+        res.status(400).json('Se ha producido un error al editar una clase');
+
+    }
+
 
 });
 
