@@ -13,6 +13,7 @@ model User {
   name       String
   email      String       @unique
   password   String
+  Taquilla   Taquilla?
   User_Clase User_Clase[]
 }
 
@@ -36,4 +37,11 @@ model User_Clase {
   User      User     @relation(fields: [id_User], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([id_User, id_Clase])
+}
+
+model Taquilla {
+  id      Int     @id @unique @default(autoincrement()) @db.SmallInt
+  Ocupada Boolean @default(false)
+  email   String? @unique
+  User    User?   @relation(fields: [email], references: [email])
 }

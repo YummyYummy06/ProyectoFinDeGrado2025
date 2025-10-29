@@ -250,6 +250,92 @@ app.post('/apuntarse-clase', async (req, res) => {
     }
 });
 
+app.get('/get-taquillas', async (req, res) => {
+
+    console.log('Entrando en get-taquillas')
+    try {
+
+        const taquillas = await prisma.taquilla.findMany({
+            orderBy: {
+                id: 'asc' // 👈 asc = ascendente (de menor a mayor)
+            }
+        });
+        res.json(taquillas);
+
+    } catch (error) {
+
+        console.error('Ha surgido un error al obtener las taquillas', error)
+        return res.status(500).json({ message: 'Ha surgido un error al obtener las taquillas', error })
+
+    }
+
+});
+
+app.put('/taquilla-reservar', async (req, res) => {
+
+    console.log('Entrando en /taquilla-reservar')
+
+    const { email, id_taquilla } = req.body;
+
+    try {
+
+
+        if (!email || !id_taquilla) {
+            console.log('El email y la taquilla son necesarios')
+            return res.status(201).json({ message: 'El email y la taquilla son necesarios' })
+        }
+        //comprobar si el email existe en nuestra base de datos
+
+        const verificar = await prisma.user.findUnique({ where: { email } }) //Aqui busca en la tabla User
+        if (!verificar) {
+            console.log('El email proporcionado no existe')
+            return res.status(401).json({ message: 'El email proporcionado no existe' })
+        }
+
+        //comprobar si ese email ya tiene una taquilla reservada y mostrarla si ese es el caso
+
+        const verificarReserva = await prisma.taquilla.findUnique({ where: { email } }) //Aqui busca en la tabla taquilla
+        if (verificarReserva) {
+            console.log(`El usuario ${verificar.email} ya tiene la taquilla ${verificarReserva.id} reservada`)
+            return res.status(401).json({ message: `El usuario ${verificar.email} ya tiene la taquilla ${verificarReserva.id} reservada` })
+        }
+        const verificarId = await prisma.taquilla.findUnique({ where: { id: id_taquilla } })
+
+        if (!verificarId) {
+            console.log('La taquilla proporcionada no existe')
+            return res.status(401).json({ message: 'La taquilla proporcionada no existe' })
+        }
+
+        // Verificar que no esté ocupada
+        if (verificarId.Ocupada) {
+            console.log(`La taquilla ${id_taquilla} ya está ocupada`);
+            return res.status(409).json({ message: `La taquilla ${id_taquilla} ya está ocupada` });
+        }
+
+
+        const reserva = await prisma.taquilla.update({
+            where: { id: id_taquilla },
+            data: {
+                email: email,
+                Ocupada: true
+            }
+        })
+
+        console.log(`Taquilla ${id_taquilla}, asignada correctamente a ${email}`)
+        return res.status(200).json({ message: `Taquilla ${id_taquilla}, asignada correctamente a ${email}` })
+
+
+    } catch (error) {
+
+        console.error('Ha ocurrido un error al reservar taquilla', error)
+        return res.status(500).json({ message: 'Ha ocurrido un error al reservar taquilla', error })
+
+    }
+
+
+
+
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
