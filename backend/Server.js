@@ -7,6 +7,7 @@ import apuntarse from './src/components/Apuntarse.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
+import { verifyToken } from './src/components/VerifyToken.js';
 
 
 
@@ -27,7 +28,6 @@ app.use(cookieParser());
 app.get('/', (res) => {
     res.send('Welcome to ElGymApp Backend!');
 });
-
 
 app.get('/get-users', async (req, res) => {
     try {
@@ -157,7 +157,6 @@ app.delete('/user-delete-one', async (req, res) => {  // Este lo quiero usar en 
 
 });
 
-
 app.delete('/user-delete-all', async (req, res) => { // Este lo quiero usar en desarrollo para borrar todos los usuarios de prueba
 
     try {
@@ -227,7 +226,6 @@ app.put('/edit-class/:id', async (req, res) => {
 
 
 });
-
 
 app.post('/apuntarse-clase', async (req, res) => {
     console.log('Entrando en apuntarse a una clase');
@@ -331,6 +329,44 @@ app.put('/taquilla-reservar', async (req, res) => {
         return res.status(500).json({ message: 'Ha ocurrido un error al reservar taquilla', error })
 
     }
+
+
+
+
+});
+
+app.post('/taquilla-get-mine', verifyToken, async (req, res) => {
+
+    const { email } = req.body;
+    const tokenEmail = req.user.email;
+
+    // Verificamos que el token y el email coincidan por seguridad para que solo tu puedas ver tu taquilla
+    if (email !== tokenEmail) {
+        return res.status(403).json({ message: "No autorizado para ver esta taquilla" });
+    }
+    try {
+
+
+        const user = await prisma.taquilla.findUnique({ where: { email } })
+
+        if (!user) {
+
+            console.log(`El usuario: ${email} no tiene taquilla reservada`)
+            return res.status(200).json({ message: `El usuario: ${email} no tiene taquilla reservada` })
+        }
+
+        const taquilla = user.id;
+
+        console.log(`El usuario ${user.email} tiene reservada la taquilla número: ${user.id}`)
+        return res.status(200).json({ message: `El usuario ${user.email} tiene reservada la taquilla número: ${taquilla}` })
+
+    } catch (error) {
+
+        console.error('Se ha producido un error al mostrar la taquilla')
+        return res.status(500).json({ message: 'Se ha producido un error al mostrar la taquilla', error })
+
+    }
+
 
 
 
