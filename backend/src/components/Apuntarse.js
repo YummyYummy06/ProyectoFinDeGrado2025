@@ -31,6 +31,14 @@ const apuntarseAunaClase = async (email, id_Clase) => {
         throw new Error(`Usuario ya está apuntado a la clase ${clase.name}`);
     }
 
+    // Comprobar aforo
+    const verAforo = await prisma.user_Clase.count({ where: { id_Clase } });
+    console.log(`El aforo de esta clase es de ${clase.aforo}, actualmente hay ${verAforo} usuarios apuntados`)
+    if (verAforo >= clase.aforo) {
+        console.log(`Error: Aforo completo (${clase.aforo}) para la clase ${clase.name}`);
+        return { success: false, error: `El aforo de esta clase (${clase.aforo}) ya está completo` };
+    }
+
     // Registrar usuario en la clase
     const userApuntado = await prisma.user_Clase.create({
         data: {
