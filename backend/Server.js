@@ -8,6 +8,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import { verifyToken } from './src/components/VerifyToken.js';
+import googleAuthRoutes from "./src/routes/GoogleAuth.js";
+import calendarRoutes from "./src/routes/Calendar.js";
+
 
 
 
@@ -21,6 +24,8 @@ const prisma = new PrismaClient();
 //Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use("/", googleAuthRoutes);
+app.use("/", calendarRoutes);
 
 
 // Definicion de endpoints
@@ -161,7 +166,14 @@ app.delete('/user-delete-all', async (req, res) => { // Este lo quiero usar en d
 
     try {
 
+        //En la base de datos hay una tabla que relaciona usuarios con clases (probablemente User_Clase).
+        // Esa tabla tiene un campo id_User que es foreign key apuntando a User.id.
+        await prisma.user_Clase.deleteMany(); // elimina todas las relaciones. Ya que si existen otras tablas con estos usuarios, supabase no me deja eliminarlos
+
         const user = await prisma.user.deleteMany();
+
+
+
         console.log('Todos los usuarios han sido eliminados con exito');
         res.json({ message: 'Todos los usuarios han sido eliminados con exito' });
     }
@@ -334,6 +346,59 @@ app.put('/taquilla-reservar', async (req, res) => {
 
 
 });
+
+
+
+/* 
+app.put('/taquilla-desreservar', async (req, res) => {
+
+    const { id_taquilla } = req.body;
+
+    const id_taquilla_num = parseInt(id_taquilla, 10);
+
+    try {
+        if (!id_taquilla_num) {
+            console.log('El id es necesario');
+            return res.status(400).json({ message: 'El id es necesario' });
+        }
+
+        const taquillaObjeto = await prisma.taquilla.findUnique({
+            where: { id: id_taquilla_num }
+        });
+
+        if (!taquillaObjeto) {
+            console.log('Id de taquilla no encontrado');
+            return res.status(404).json({ message: 'Id de taquilla no encontrado' });
+        }
+
+        // Si quieres eliminar el usuario asociado, suponiendo que hay una relación 1:1
+        await prisma.user.delete({
+            where: { id: taquillaObjeto.id } // Ajusta según tu esquema
+        });
+
+        // Actualizamos la taquilla
+        const taquillaUpdated = await prisma.taquilla.update({
+            where: { id: id_taquilla_num },
+            data: {
+                email: null,
+                User: null,
+                Ocupada: false
+            }
+        });
+
+        return res.status(200).json(taquillaUpdated);
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Error del servidor' });
+    }
+
+
+});
+*/
+
+
+
 
 app.post('/taquilla-get-mine', verifyToken, async (req, res) => {
 
