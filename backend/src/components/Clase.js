@@ -4,6 +4,19 @@ const prisma = new PrismaClient();
 // Controlador de las clases del gimnasio
 
 
+const verClases = async (req, res) => {
+    console.log('Entrando en get-class')
+    try {
+
+        const clases = await prisma.clase.findMany();
+        res.json(clases);
+
+    }
+    catch (error) {
+        console.errror('Ha habido un error al obtener el listado de clases', error)
+        res.status(500).json({ message: 'Ha habido un error al obtener el listado de clases', error })
+    }
+};
 
 
 const crearClase = async (req, res) => {
@@ -95,9 +108,46 @@ const editarClase = async (req, res) => {
 }
 
 
+const deleteClase = async (req, res) => {
+
+    console.log('Entrando en eliminar clase');
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ message: "No se proporcionó un ID" });
+    }
+
+    try {
+
+        await prisma.user_Clase.deleteMany({
+            where: { id_Clase: id }
+        });
+
+        const clase = await prisma.clase.delete({
+            where: { id }
+        });
+
+        return res.json({ message: `Se ha eliminado la clase ${clase.name} correctamente` });
+
+    } catch (error) {
+        console.error(error);
+
+        if (error.code === "P2025") {
+            return res.status(404).json({ message: "La clase no existe" });
+        }
+
+        return res.status(500).json({
+            message: "Se ha producido un error inesperado al eliminar la clase",
+            error
+        });
+    }
+};
+
+
 
 export default {
+    verClases,
     crearClase,
-    editarClase
-
+    editarClase,
+    deleteClase
 };

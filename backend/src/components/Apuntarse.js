@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-const apuntarseAunaClase = async (email, id_Clase) => {
+const apuntarseAunaClase = async (req, res) => {
+
+    const { email, id_Clase } = req.body;
 
     if (!email || !id_Clase) {
         throw new Error('Es necesario el email del usuario y el id de la clase');
@@ -33,10 +35,9 @@ const apuntarseAunaClase = async (email, id_Clase) => {
 
     // Comprobar aforo
     const verAforo = await prisma.user_Clase.count({ where: { id_Clase } });
-    console.log(`El aforo de esta clase es de ${clase.aforo}, actualmente hay ${verAforo} usuarios apuntados`)
     if (verAforo >= clase.aforo) {
         console.log(`Error: Aforo completo (${clase.aforo}) para la clase ${clase.name}`);
-        return { success: false, error: `El aforo de esta clase (${clase.aforo}) ya está completo` };
+        return res.status(200).json({ message: `El aforo de esta clase (${clase.aforo}) ya está completo` });
     }
 
     // Registrar usuario en la clase
@@ -49,11 +50,9 @@ const apuntarseAunaClase = async (email, id_Clase) => {
             className: clase.name
         }
     });
-
-    return {
-        message: `Usuario ${user.name} registrado correctamente para la clase ${clase.name}`,
-
-    };
+    const aforoActual = verAforo + 1;
+    console.log(`El aforo de esta clase es de ${clase.aforo}, actualmente hay ${aforoActual} usuarios apuntados`)
+    return res.status(200).json({ message: `Usuario ${user.name} registrado correctamente para la clase ${clase.name}` })
 };
 
 export default {
