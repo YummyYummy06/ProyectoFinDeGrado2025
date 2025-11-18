@@ -35,6 +35,9 @@ app.get('/', (res) => {
     res.send('Welcome to ElGymApp Backend!');
 });
 
+
+// Usuario
+
 app.get('/get-users', handleUsuario.verUsuarios);
 
 app.post('/user-register', validacionUser, handleUsuario.registrarUsuario);
@@ -47,6 +50,8 @@ app.delete('/user-delete-one', handleUsuario.eliminarUnUsuario);
 
 app.delete('/user-delete-all', handleUsuario.eliminarTodosUsuarios);
 
+// Clase
+
 app.get('/get-class', handleClase.verClases);
 
 app.post('/create-class', handleClase.crearClase);
@@ -57,14 +62,14 @@ app.post('/apuntarse-clase', apuntarse.apuntarseAunaClase);
 
 app.delete('/delete-class/:id', handleClase.deleteClase);
 
+// Taquilla
+
 app.get('/get-taquillas', handleTaquilla.verTaquillas);
 
 app.put('/taquilla-reservar', handleTaquilla.reservarTaquilla);
 
-
-
 /* 
-app.put('/taquilla-desreservar', async (req, res) => {
+app.put('/taquilla-cancelarReserva', async (req, res) => {
 
     const { id_taquilla } = req.body;
 
@@ -110,9 +115,6 @@ app.put('/taquilla-desreservar', async (req, res) => {
 
 });
 */
-
-
-
 
 app.post('/taquilla-get-mine', verifyToken, handleTaquilla.verMiTaquilla);
 
