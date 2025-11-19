@@ -68,53 +68,7 @@ app.get('/get-taquillas', handleTaquilla.verTaquillas);
 
 app.put('/taquilla-reservar', handleTaquilla.reservarTaquilla);
 
-/* 
-app.put('/taquilla-cancelarReserva', async (req, res) => {
-
-    const { id_taquilla } = req.body;
-
-    const id_taquilla_num = parseInt(id_taquilla, 10);
-
-    try {
-        if (!id_taquilla_num) {
-            console.log('El id es necesario');
-            return res.status(400).json({ message: 'El id es necesario' });
-        }
-
-        const taquillaObjeto = await prisma.taquilla.findUnique({
-            where: { id: id_taquilla_num }
-        });
-
-        if (!taquillaObjeto) {
-            console.log('Id de taquilla no encontrado');
-            return res.status(404).json({ message: 'Id de taquilla no encontrado' });
-        }
-
-        // Si quieres eliminar el usuario asociado, suponiendo que hay una relación 1:1
-        await prisma.user.delete({
-            where: { id: taquillaObjeto.id } // Ajusta según tu esquema
-        });
-
-        // Actualizamos la taquilla
-        const taquillaUpdated = await prisma.taquilla.update({
-            where: { id: id_taquilla_num },
-            data: {
-                email: null,
-                User: null,
-                Ocupada: false
-            }
-        });
-
-        return res.status(200).json(taquillaUpdated);
-
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Error del servidor' });
-    }
-
-
-});
-*/
+app.put('/taquilla-cancelarReserva', handleTaquilla.cancelarReserva);
 
 app.post('/taquilla-get-mine', verifyToken, handleTaquilla.verMiTaquilla);
 

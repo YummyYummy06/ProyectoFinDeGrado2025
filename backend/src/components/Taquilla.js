@@ -84,6 +84,7 @@ const reservarTaquilla = async (req, res) => {
 
 
 const verMiTaquilla = async (req, res) => {
+
     const { email } = req.body;
     const tokenEmail = req.user.email;
 
@@ -116,8 +117,50 @@ const verMiTaquilla = async (req, res) => {
 
 };
 
+
+const cancelarReserva = async (req, res) => {
+
+    const { email } = req.body;
+
+    try {
+
+        const user = await prisma.user.findUnique({ where: { email } })
+
+        const taquilla = await prisma.taquilla.findUnique({ where: { email } })
+
+        if (!user) {
+            return res.status(201).json({ message: `No hay ningun usuario registrado con ese email` })
+        }
+
+        if (!taquilla) {
+            return res.status(201).json({ message: `El usuario ${user.name} no tiene niguna taquilla asignada` })
+        }
+
+        const reservaCancelada = await prisma.taquilla.update({
+            where:
+                { email },
+
+            data:
+            {
+                Ocupada: false,
+                email: null
+            }
+
+
+        });
+
+        return res.status(200).json({ message: `La taquilla ${reservaCancelada.id} vuelve a estar disponible` })
+
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Error inesperado al cancelar reserva', error });
+    }
+};
+
 export default {
     verTaquillas,
     reservarTaquilla,
-    verMiTaquilla
+    verMiTaquilla,
+    cancelarReserva
 };
