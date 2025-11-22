@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
+#root {
+  max-width: 1280px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: "Anton", sans-serif;
+}
+#inicio {
+  background-image: url("/images/background-inicio.jpg");
+  background-size: cover; /* que la imagen cubra todo */
+  background-position: center; /* centrar la imagen */
+  background-repeat: no-repeat; /* no repetir */
+  width: 100vw; /* ancho completo */
+  height: 100vh; /* altura de toda la ventana */
+}
+.logo-titulo {
+  display: flex;
+}
+.logo-titulo h1 {
+  margin-left: 2rem;
+}
+
+.header-app {
+  display: flex;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  padding-inline: 50px;
+  border-bottom: black solid 2px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  justify-content: space-around;
+}
+
+.header-titulo {
+  font-size: 3vh;
+  text-align: center;
+  transition: transform 0.3s ease; /* suaviza la animación */
+}
+.header-titulo:hover,
+.menu-app a:hover {
+  transform: scale(1.1);
+}
+.menu-app a {
+  display: block; /* necesario para que scale funcione */
+  transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: scale(1.5);
+}
+.header-logo {
+  height: 50px;
+  transition: transform 0.3s ease; /* suaviza la animación */
+}
+.menu-app {
+  width: 50%;
+  padding: 0;
+  align-content: center;
+  margin-right: 50px;
+  transition: transform 0.3s ease;
+}
+
+.menu-app ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pagina {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* para centrar verticalmente */
+  flex-direction: column;
+}
+
+.slogan {
+  font-size: 150px;
+  margin: 0;
+  text-shadow: 15px 15px rgba(0, 0, 0, 0.5);
+}
+.subSlogan {
+  font-size: 20px;
+  margin: 0;
+  text-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+  margin-top: 20px;
+  font-size: 30px;
+  background-color: #f4c430;
+  color: black;
+  border: black solid 2px;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
