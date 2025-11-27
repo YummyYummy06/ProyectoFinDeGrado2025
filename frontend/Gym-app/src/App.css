@@ -98,8 +98,31 @@
 }
 
 .btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.1´);
   transition: transform 0.3s ease;
+}
+
+.content {
+  text-align: center;
+  width: 100vw; /* ancho completo */
+  height: 100vh; /* altura de toda la ventana */
+  margin-top: 58px;
+}
+
+.encabezado {
+  padding-top: 50px;
+}
+
+.tresColumnas {
+  display: grid;
+  grid-template-columns: (repeat(3, 1fr));
+  border: red solid 2px;
+  height: 100vh;
+  width: 100%;
+}
+
+.tresColumnas > div {
+  border: blue solid 2px;
 }
 
 @keyframes logo-spin {
