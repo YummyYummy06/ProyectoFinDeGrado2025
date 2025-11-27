@@ -111,18 +111,23 @@
 
 .encabezado {
   padding-top: 50px;
+  color: #f4c430;
+  font-style: italic;
 }
 
 .tresColumnas {
   display: grid;
-  grid-template-columns: (repeat(3, 1fr));
-  border: red solid 2px;
-  height: 100vh;
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
 }
 
-.tresColumnas > div {
-  border: blue solid 2px;
+.imagenColumna {
+  height: 400px;
+  width: 400px;
+}
+
+.description {
+  margin-bottom: 50px;
 }
 
 @keyframes logo-spin {

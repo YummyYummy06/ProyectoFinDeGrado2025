@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../App.css";
 
 function WhatWeDo() {
@@ -18,10 +19,10 @@ function WhatWeDo() {
           <menu className="menu-app">
             <ul>
               <li>
-                <a>Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a>About Us</a>
+                <Link to="/WhatWeDo">About Us</Link>
               </li>
               <li>
                 <a>Contact</a>
@@ -42,9 +43,27 @@ function WhatWeDo() {
             We’re committed to providing you with the best training experience.
           </h4>
           <div className="tresColumnas">
-            <div className="columna1"></div>
-            <div className="columna2"></div>
-            <div className="columna3"></div>
+            <div className="columna1">
+              <img
+                className="imagenColumna"
+                src="/images/sweeting_guy.jpg"
+                alt="sweeting_guy"
+              ></img>
+            </div>
+            <div className="columna2">
+              <img
+                className="imagenColumna"
+                src="/images/gym_mancuernas.jpg"
+                alt="gym_mancuernas"
+              ></img>
+            </div>
+            <div className="columna3">
+              <img
+                className="imagenColumna"
+                src="/images/weight_lifting.jpg"
+                alt="weight_lifting"
+              ></img>
+            </div>
           </div>
         </div>
       </div>

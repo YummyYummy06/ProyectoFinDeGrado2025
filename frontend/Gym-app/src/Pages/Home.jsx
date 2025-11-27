@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../App.css";
 
 function Home() {
@@ -18,16 +20,16 @@ function Home() {
           <menu className="menu-app">
             <ul>
               <li>
-                <a>Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a>About Us</a>
+                <Link to="/WhatWeDo">About Us</Link>
               </li>
               <li>
                 <a>Contact</a>
               </li>
               <li>
-                <a href="../src/Pages/Register.jsx">Resgister</a>
+                <a>Resgister</a>
               </li>
               <li>
                 <a>Log In</a>
