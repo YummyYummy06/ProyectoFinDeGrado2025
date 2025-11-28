@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "../App.css";
 
 function WhatWeDo() {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className="WhatWeDo">
@@ -16,7 +19,11 @@ function WhatWeDo() {
               </a>
             </h1>
           </div>
-          <menu className="menu-app">
+          {/* Botón hamburguesa (solo aparece en móvil) */}
+          <button className="hamburger" onClick={() => setOpen(!open)}>
+            ☰
+          </button>
+          <menu className={`menu-app ${open ? "open" : ""}`}>
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -43,26 +50,32 @@ function WhatWeDo() {
             We’re committed to providing you with the best training experience.
           </h4>
           <div className="tresColumnas">
-            <div className="columna1">
-              <img
-                className="imagenColumna"
-                src="/images/sweeting_guy.jpg"
-                alt="sweeting_guy"
-              ></img>
+            <div className="columnas">
+              <Link to="/">
+                <img
+                  className="imagenColumna"
+                  src="/images/sweeting_guy.jpg"
+                  alt="sweeting_guy"
+                ></img>
+              </Link>
             </div>
-            <div className="columna2">
-              <img
-                className="imagenColumna"
-                src="/images/gym_mancuernas.jpg"
-                alt="gym_mancuernas"
-              ></img>
+            <div className="columnas">
+              <Link to="/">
+                <img
+                  className="imagenColumna"
+                  src="/images/gym_mancuernas.jpg"
+                  alt="gym_mancuernas"
+                ></img>
+              </Link>
             </div>
-            <div className="columna3">
-              <img
-                className="imagenColumna"
-                src="/images/weight_lifting.jpg"
-                alt="weight_lifting"
-              ></img>
+            <div className="columnas">
+              <Link to="/">
+                <img
+                  className="imagenColumna"
+                  src="/images/weight_lifting.jpg"
+                  alt="weight_lifting"
+                ></img>
+              </Link>
             </div>
           </div>
         </div>

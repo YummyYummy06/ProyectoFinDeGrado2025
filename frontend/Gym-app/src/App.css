@@ -17,6 +17,8 @@
 }
 .logo-titulo {
   display: flex;
+  align-items: center;
+  gap: 15px;
 }
 .logo-titulo h1 {
   margin-left: 2rem;
@@ -31,7 +33,9 @@
   border-bottom: black solid 2px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000; /*Para que siempre se vea*/
 }
 
 .header-titulo {
@@ -39,7 +43,14 @@
   text-align: center;
   transition: transform 0.3s ease; /* suaviza la animación */
 }
-.header-titulo:hover,
+.header-titulo:hover {
+  transform: scale(1.07);
+}
+
+.hamburger {
+  display: none;
+}
+
 .menu-app a:hover {
   transform: scale(1.1);
 }
@@ -49,7 +60,7 @@
 }
 
 .header-logo:hover {
-  transform: scale(1.5);
+  transform: scale(1.3);
 }
 .header-logo {
   height: 50px;
@@ -67,6 +78,8 @@
   list-style: none;
   display: flex;
   justify-content: space-around;
+  padding: 0;
+  margin: 0;
 }
 
 .pagina {
@@ -116,37 +129,83 @@
 }
 
 .tresColumnas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Permite que bajen a otra fila */
+  gap: 20px; /* Espacio entre columnas */
+  align-items: center;
+  justify-content: center; /* Centra incluso cuando hay 1 o 2 columnas */
+
+  margin-inline: 20px; /* Márgenes más pequeños en móviles */
+}
+
+.columnas {
+  height: auto; /* Para que pueda adaptarse */
+  width: 400px; /* Tamaño base */
+  max-width: 100%; /* Que no exceda el ancho disponible */
 }
 
 .imagenColumna {
+  width: 100%; /* La imagen se adapta al contenedor */
   height: 400px;
-  width: 400px;
+  object-fit: cover; /* Recorta para mantener proporción sin deformar */
+}
+
+.imagenColumna:hover {
+  outline: #f4c430 solid 2px;
 }
 
 .description {
   margin-bottom: 50px;
 }
+@media (max-width: 800px) {
+  .menu-app ul {
+    flex-direction: column;
+    gap: 20px;
+  }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  .menu-app {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    width: 70%;
+    padding: 20px 30px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    border-left: 2px solid black;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
+  /* Cuando el menú está abierto */
+  .menu-app.open {
+    transform: translateX(0);
+  }
+
+  /* El menú NO se muestra inline en móvil */
+  .menu-app ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Mostrar la hamburguesa */
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+  }
+
+  /* Título más pequeño en móvil */
+  .header-titulo {
+    font-size: 2vh;
+  }
+
+  .header-logo {
+    height: 40px;
+  }
+
+  .header-app {
+    padding-inline: 20px;
+  }
 }
