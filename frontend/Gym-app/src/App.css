@@ -106,12 +106,13 @@
   font-size: 30px;
   background-color: #f4c430;
   color: black;
-  border: black solid 2px;
+  outline: black solid 2px;
   border-radius: 10px;
 }
 
-.btn:hover {
-  transform: scale(1.1´);
+.btn:hover,
+.submit:hover {
+  transform: scale(1.1);
   transition: transform 0.3s ease;
 }
 
@@ -120,6 +121,16 @@
   width: 100vw; /* ancho completo */
   height: 100vh; /* altura de toda la ventana */
   margin-top: 58px;
+}
+.content-Register {
+  text-align: center;
+  width: 100vw; /* ancho completo */
+  height: 100vh; /* altura de toda la ventana */
+  margin-top: 58px;
+  background-image: url("/images/kettlesPhoto.jpg");
+  background-size: cover; /* que la imagen cubra todo */
+  background-position: center; /* centrar la imagen */
+  background-repeat: no-repeat; /* no repetir */
 }
 
 .encabezado {
@@ -143,8 +154,43 @@
   width: 400px; /* Tamaño base */
   max-width: 100%; /* Que no exceda el ancho disponible */
 }
+.columnas-Inputs {
+  height: 400px; /* Para que pueda adaptarse */
+  width: 400px; /* Tamaño base */
+  max-width: 100%; /* Que no exceda el ancho disponible */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.columnas-Inputs input {
+  width: 300px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.498);
+  border: 0;
+  color: black;
+  font-weight: bolder;
+  font-size: larger;
+  text-align: center;
+}
+
+.columnas-Inputs input::placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.564);
+  font-weight: bolder;
+}
+.columnas-Inputs input:focus {
+  outline: solid #f4c430 2px;
+}
 
 .imagenColumna {
+  width: 100%; /* La imagen se adapta al contenedor */
+  height: 400px;
+  object-fit: cover; /* Recorta para mantener proporción sin deformar */
+}
+
+.imagenColumna-logo {
   width: 100%; /* La imagen se adapta al contenedor */
   height: 400px;
   object-fit: cover; /* Recorta para mantener proporción sin deformar */
@@ -157,6 +203,20 @@
 .description {
   margin-bottom: 50px;
 }
+
+.motivationText {
+  color: #f4c430;
+  margin: 0;
+}
+
+.submit {
+  margin-top: 25px;
+  background-color: #f4c430;
+  color: black;
+  outline: black solid 2px;
+  width: 150px;
+}
+
 @media (max-width: 800px) {
   .menu-app ul {
     flex-direction: column;

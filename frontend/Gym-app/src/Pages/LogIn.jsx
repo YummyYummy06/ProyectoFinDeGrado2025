@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import "../App.css";
 
 function LogIn() {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className="LogInPage">

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
 import "../App.css";
 
 function Register() {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <div className="Register">
@@ -41,6 +42,30 @@ function Register() {
             </ul>
           </menu>
         </header>
+        <div className="content-Register">
+          <h1 className="encabezado">REGISTER</h1>
+          <div className="tresColumnas">
+            <div className="columnas">
+              <h1 className="motivationText">START YOUR</h1>
+              <h1 className="motivationText">JOURNEY</h1>
+              <h1 className="motivationText">TODAY!</h1>
+            </div>
+            <div className="columnas-Inputs">
+              <h2>EMAIL</h2>
+              <input type="email" placeholder="YourEmail@gmail.com"></input>
+              <h2>PASSWORD</h2>
+              <input type="password" placeholder="Your password"></input>
+              <button className="submit">Register</button>
+            </div>
+            <div className="columnas">
+              <img
+                className="imagenColumna-logo"
+                src="/icon2.png"
+                alt="Brand-Logo"
+              ></img>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
