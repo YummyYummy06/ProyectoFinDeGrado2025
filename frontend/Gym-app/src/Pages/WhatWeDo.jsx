@@ -154,6 +154,29 @@ function WhatWeDo() {
             </div>
           </div>
         </div>
+        <footer className="footer-app">
+          <div className="tresColumnas">
+            <div className="columnas">
+              <h1>ADRESS</h1>
+              <p>Av. Fontanilla, 3, Marbella, CP 29601</p>
+            </div>
+            <div className="columnas">
+              <h1>EMAIL</h1>
+              <p>TheClubBoxingStudio@gmail.com</p>
+            </div>
+            <div className="columnas">
+              <h1>PHONE</h1>
+              <p>+34 634 564 345</p>
+            </div>
+          </div>
+          <div className="link-info">
+            <Link to="/">Home</Link>
+            <Link to="/WhatWeDo">About Us</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/register">Register</Link>
+            <Link to="/logIn">Log In</Link>
+          </div>
+        </footer>
       </div>
     </>
   );

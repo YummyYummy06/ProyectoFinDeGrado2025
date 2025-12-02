@@ -274,6 +274,24 @@
   width: 150px;
 }
 
+.footer-app {
+  width: 100vw;
+  height: 100%;
+  background-color: #f4c430;
+  color: black;
+}
+.footer-app h1,
+.footer-app p {
+  margin: 10px;
+}
+
+.link-info {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
 @media (max-width: 800px) {
   .menu-app ul {
     flex-direction: column;
