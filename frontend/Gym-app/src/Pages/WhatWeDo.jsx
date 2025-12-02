@@ -32,13 +32,13 @@ function WhatWeDo() {
                 <Link to="/WhatWeDo">About Us</Link>
               </li>
               <li>
-                <a>Contact</a>
+                <Link to="/contact">Contact</Link>
               </li>
               <li>
-                <a>Resgister</a>
+                <Link to="/register">Register</Link>
               </li>
               <li>
-                <a>Log In</a>
+                <Link to="/logIn">Log In</Link>
               </li>
             </ul>
           </menu>

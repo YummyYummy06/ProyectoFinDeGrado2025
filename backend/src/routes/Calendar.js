@@ -64,9 +64,6 @@ router.post("/calendar/delete", async (req, res) => {
 });
 
 
-
-
-
 router.get("/calendar/list", async (req, res) => {
     try {
         // ⚡ Cargar tokens previamente guardados

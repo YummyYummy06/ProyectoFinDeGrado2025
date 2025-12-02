@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 import "../App.css";
 
-function Home() {
+function Register() {
   return (
     <>
-      <div className="App" id="inicio">
+      <div className="Register">
         <header className="header-app">
           <div className="logo-titulo">
             <a href="http://localhost:5173/">
@@ -41,13 +41,8 @@ function Home() {
             </ul>
           </menu>
         </header>
-        <div className="pagina">
-          <h1 className="slogan">SHAPE YOUR STORY</h1>
-          <h3 className="subSlogan">- OWN YOUR JOURNEY -</h3>
-          <button className="btn">JOIN TODAY !</button>
-        </div>
       </div>
     </>
   );
 }
-export default Home;
+export default Register;
