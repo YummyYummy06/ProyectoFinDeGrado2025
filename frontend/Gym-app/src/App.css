@@ -15,6 +15,7 @@
   width: 100vw; /* ancho completo */
   height: 100vh; /* altura de toda la ventana */
 }
+
 .logo-titulo {
   display: flex;
   align-items: center;
@@ -138,6 +139,10 @@
   color: #f4c430;
   font-style: italic;
 }
+.encabezado-2 {
+  color: #f4c430;
+  text-align: left;
+}
 
 .tresColumnas {
   display: flex;
@@ -149,11 +154,22 @@
   margin-inline: 20px; /* Márgenes más pequeños en móviles */
 }
 
-.columnas {
+.columnas,
+.columnas2 {
   height: auto; /* Para que pueda adaptarse */
   width: 400px; /* Tamaño base */
   max-width: 100%; /* Que no exceda el ancho disponible */
 }
+
+.columnas2 {
+  background-color: #f4c430;
+  color: black;
+}
+.columnas2:hover {
+  background-color: black;
+  color: white;
+}
+
 .columnas-Inputs {
   height: 400px; /* Para que pueda adaptarse */
   width: 400px; /* Tamaño base */
@@ -189,6 +205,11 @@
   height: 400px;
   object-fit: cover; /* Recorta para mantener proporción sin deformar */
 }
+.imagenColumna2 {
+  width: 100%; /* La imagen se adapta al contenedor */
+  height: 300px;
+  object-fit: cover; /* Recorta para mantener proporción sin deformar */
+}
 
 .imagenColumna-logo {
   width: 100%; /* La imagen se adapta al contenedor */
@@ -200,15 +221,51 @@
   outline: #f4c430 solid 2px;
 }
 
+.imagenColumna-foto {
+  width: 100%; /* La imagen se adapta al contenedor */
+  height: 500px;
+  object-fit: cover;
+}
+.imagenColumna-foto1 {
+  width: 300px; /* La imagen se adapta al contenedor */
+  height: 500px;
+  object-fit: cover;
+  padding-left: 100px;
+  padding-bottom: 200px;
+}
+.imagenColumna-foto2 {
+  width: 300px; /* La imagen se adapta al contenedor */
+  height: 500px;
+  object-fit: cover;
+
+  padding-top: 200px;
+}
+
+.columnas-info {
+  width: 500px;
+  height: 600px;
+}
+
 .description {
   margin-bottom: 50px;
+}
+.description-2 {
+  text-align: left;
+  font-size: 25px;
+}
+.description-3 {
+  text-align: left;
+  margin-inline: 25px;
 }
 
 .motivationText {
   color: #f4c430;
   margin: 0;
 }
-
+.subtittle {
+  text-align: left;
+  margin-left: 30px;
+}
 .submit {
   margin-top: 25px;
   background-color: #f4c430;
@@ -267,5 +324,60 @@
 
   .header-app {
     padding-inline: 20px;
+  }
+  .content,
+  .content-Register {
+    height: auto;
+    margin-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .content {
+    margin-top: 58px;
+  }
+
+  /* Apilar columnas verticalmente */
+  .tresColumnas {
+    flex-direction: column;
+    gap: 15px;
+    margin-inline: 10px;
+  }
+
+  .columnas,
+  .columnas-info {
+    width: 100%;
+    max-width: 100%;
+    padding: 0; /* elimina padding extra que pueda romper layout */
+  }
+  .columnas-info {
+    height: 100%;
+  }
+
+  /* Ajustar imágenes */
+  .imagenColumna,
+  .imagenColumna-foto,
+  .imagenColumna-foto1,
+  .imagenColumna-foto2 {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 0; /* elimina padding excesivo en móvil */
+  }
+
+  /* Ajustar texto */
+  .encabezado,
+  .encabezado-2 {
+    font-size: 6vw; /* más pequeño en móvil */
+    text-align: center;
+  }
+
+  .description,
+  .description-2 {
+    font-size: 4vw;
+    text-align: center;
+  }
+
+  .columnas-Inputs input {
+    width: 90%; /* ocupa casi todo el ancho en móvil */
   }
 }

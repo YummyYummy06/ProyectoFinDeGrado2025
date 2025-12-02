@@ -79,6 +79,81 @@ function WhatWeDo() {
             </div>
           </div>
         </div>
+        <div className="content">
+          <div className="tresColumnas">
+            <div className="columnas-info">
+              <h1 className="encabezado-2"> THE CLUB - TEAM</h1>
+              <h4 className="description-2">
+                The Club Boxing Studio was founded in Marbella in 2025 with the
+                passion of a dedicated team committed to transforming the way
+                people train.
+              </h4>
+              <h4 className="description-2">
+                At The Club, we believe that every punch, every workout, and
+                every day is an opportunity to push yourself further and build
+                your best version.
+              </h4>
+            </div>
+            <div className="columnas">
+              <img
+                className="imagenColumna-foto1"
+                src="/images/workout1.png"
+                alt="workout1"
+              ></img>
+            </div>
+            <div className="columnas">
+              <img
+                className="imagenColumna-foto2"
+                src="/images/workout2.png"
+                alt="workout2"
+              ></img>
+            </div>
+          </div>
+        </div>
+        <div className="content">
+          <h1 className="encabezado">BEYOND THE RING</h1>
+          <div className="tresColumnas">
+            <div className="columnas2">
+              <img
+                className="imagenColumna2"
+                src="/images/parking.png"
+                alt="Parking"
+              ></img>
+              <h4 className="description-3">
+                We offer convenient on-site parking so you can arrive, train,
+                and leave without stress. Your workout should start easy — from
+                the moment you park.
+              </h4>
+              <h3 className="subtittle">Parking</h3>
+            </div>
+            <div className="columnas2">
+              <img
+                className="imagenColumna2"
+                src="/images/lockers.png"
+                alt="Lockers"
+              ></img>
+              <h4 className="description-3">
+                Keep your belongings safe and secure in our modern locker area.
+                Train with peace of mind knowing your gear is well taken care
+                of.
+              </h4>
+              <h3 className="subtittle">Lockers</h3>
+            </div>
+            <div className="columnas2">
+              <img
+                className="imagenColumna2"
+                src="/images/cafe.png"
+                alt="Café"
+              ></img>
+              <h4 className="description-3">
+                Recharge before or after your session in our cozy café. Enjoy
+                healthy snacks, fresh drinks, and a space to connect with
+                others.
+              </h4>
+              <h3 className="subtittle">Cafe</h3>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

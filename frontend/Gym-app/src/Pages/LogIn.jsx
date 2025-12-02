@@ -44,6 +44,30 @@ function LogIn() {
             </ul>
           </menu>
         </header>
+        <div className="content-Register">
+          <h1 className="encabezado">LOG IN</h1>
+          <div className="tresColumnas">
+            <div className="columnas">
+              <h1 className="motivationText">START YOUR</h1>
+              <h1 className="motivationText">JOURNEY</h1>
+              <h1 className="motivationText">TODAY!</h1>
+            </div>
+            <div className="columnas-Inputs">
+              <h2>EMAIL</h2>
+              <input type="email" placeholder="YourEmail@gmail.com"></input>
+              <h2>PASSWORD</h2>
+              <input type="password" placeholder="Your password"></input>
+              <button className="submit">Log In</button>
+            </div>
+            <div className="columnas">
+              <img
+                className="imagenColumna-logo"
+                src="/icon2.png"
+                alt="Brand-Logo"
+              ></img>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
