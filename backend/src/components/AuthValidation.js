@@ -13,7 +13,7 @@ export const validacionUser = (req, res, next) => {
 
         if (!username || !password) {
             console.log('Faltan datos de autenticacion'); //Esto me va a avisar en el backend
-            return res.status(400).json({ error: 'Usuario y contraseña son requeridos' });
+            return res.status(500).json({ error: 'Usuario y contraseña son requeridos' });
         }
 
         if (username.length < 3) {

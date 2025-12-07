@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -8,7 +8,7 @@ const verUsuarios = async (req, res) => {
     try {
 
         const users = await prisma.user.findMany(); // El mapeo lo hace en letra minuscula, este es el nombre de la tabla en el modelo en schema.prisma
-        res.json(users);
+        res.status(200).json(users);
     }
     catch (error) {
         console.error('Error listando a users:', error);

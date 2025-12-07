@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "dev": "nodemon Server.js"
   },
   "keywords": [],
@@ -13,7 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "3.1.10",
-    "prisma": "6.18.0"
+    "prisma": "6.18.0",
+    "supertest": "^7.1.4"
   },
   "dependencies": {
     "@prisma/client": "6.18.0",
@@ -22,6 +23,7 @@
     "dotenv": "17.2.3",
     "express": "5.1.0",
     "googleapis": "166.0.0",
+    "jest": "^30.2.0",
     "jsonwebtoken": "9.0.2"
   }
 }
