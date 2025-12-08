@@ -29,6 +29,7 @@ app.use("/", googleAuthRoutes);
 app.use("/", calendarRoutes);
 
 
+
 // Definicion de endpoints
 
 app.get('/', (req, res) => {
