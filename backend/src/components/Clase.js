@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 // Controlador de las clases del gimnasio
 
@@ -93,7 +93,7 @@ const editarClase = async (req, res) => {
         });
 
         console.log(`La clase ${id} ha sido actualizada con exito`)
-        return res.status(200).json({ message: `La clase ha sido actualizada con exito`, claseEditada });
+        return res.status(201).json({ message: `La clase ha sido actualizada con exito`, clase: claseEditada });
 
 
 
