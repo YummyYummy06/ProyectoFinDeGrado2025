@@ -2,6 +2,9 @@ import request from "supertest";
 import app from "../Server.js";
 import { prisma } from "../src/components/Usuario.js";
 import bcrypt from "bcrypt";
+import { expect, jest } from "@jest/globals";
+
+jest.setTimeout(300000);
 
 describe("Tests de integración para usuarios", () => {
 

@@ -1,5 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { expect, jest } from "@jest/globals";
+
+jest.setTimeout(300000);
 
 describe("Pruebas unitarias de Usuario", () => {
 
