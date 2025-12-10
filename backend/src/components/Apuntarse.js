@@ -32,7 +32,7 @@ const apuntarseAunaClase = async (req, res) => {
         // Comprobar aforo
         const verAforo = await prisma.user_Clase.count({ where: { id_Clase } });
         if (verAforo >= clase.aforo) {
-            return res.status(200).json({ message: `El aforo de esta clase (${clase.aforo}) ya está completo` });
+            return res.status(409).json({ error: `El aforo de esta clase (${clase.aforo}) ya está completo` });
         }
 
         // Registrar usuario en la clase

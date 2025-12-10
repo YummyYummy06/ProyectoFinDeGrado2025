@@ -127,7 +127,7 @@ const deleteClase = async (req, res) => {
             where: { id }
         });
 
-        return res.json({ message: `Se ha eliminado la clase ${clase.name} correctamente` });
+        return res.status(200).json({ message: `Se ha eliminado la clase ${clase.name} correctamente` });
 
     } catch (error) {
         console.error(error);
