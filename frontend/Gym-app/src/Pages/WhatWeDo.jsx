@@ -7,7 +7,7 @@ function WhatWeDo() {
 
   return (
     <>
-      <div className="WhatWeDo">
+      <div id="#top" className="WhatWeDo">
         <header className="header-app">
           <div className="logo-titulo">
             <a href="http://localhost:5173/">
@@ -154,6 +154,9 @@ function WhatWeDo() {
             </div>
           </div>
         </div>
+        <a href="#top" class="bttop">
+          Back to Top
+        </a>
         <footer className="footer-app">
           <div className="tresColumnas">
             <div className="columnas">

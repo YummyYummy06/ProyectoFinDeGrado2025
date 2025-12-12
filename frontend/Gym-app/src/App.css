@@ -298,6 +298,20 @@
   justify-content: space-around;
 }
 
+.bttop {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background-color: #f4c430;
+  padding: 20px;
+  border-radius: 30px;
+  color: black;
+}
+.bttop:hover {
+  color: #f4c430;
+  background-color: black;
+}
+
 @media (max-width: 800px) {
   .menu-app ul {
     flex-direction: column;
