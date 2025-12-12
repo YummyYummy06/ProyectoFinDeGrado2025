@@ -30,7 +30,7 @@ export const validacionUser = (req, res, next) => {
             return res.status(400).json({ error: 'La contraseña debe tener al menos 6 caracteres' });
         }
 
-        if (!email.includes('@')) {
+        if (!email.includes('@gmail.com')) {
             console.log('El email no es válido');
             return res.status(400).json({ error: 'El email no es válido' });
         }

@@ -3,7 +3,36 @@ import { useState } from "react";
 import "../App.css";
 
 function Register() {
+  const PORT = import.meta.env.VITE_PORT;
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+
+  const handleClick = async () => {
+    try {
+      const respuesta = await fetch(`http://localhost:${PORT}/user-register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, username }),
+      });
+      const data = await respuesta.json();
+      console.log("El servidor te manda esta respuesta:", data);
+      if (respuesta.ok) {
+        console.log("Registro exitoso:", data);
+        alert("Registro realizado con éxito!"); // mensaje rápido
+
+        // Espera 2 segundos antes de recargar
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); // 2000ms = 2 segundos
+      } else {
+        console.error("Error en el registro");
+      }
+    } catch (error) {
+      console.error("Error en el fetch", error);
+    }
+  };
   return (
     <>
       <div className="Register">
@@ -51,11 +80,30 @@ function Register() {
               <h1 className="motivationText">TODAY!</h1>
             </div>
             <div className="columnas-Inputs">
+              <h2>USERNAME</h2>
+              <input
+                type="text"
+                placeholder="Your Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              ></input>
               <h2>EMAIL</h2>
-              <input type="email" placeholder="YourEmail@gmail.com"></input>
+              <input
+                type="email"
+                placeholder="YourEmail@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
               <h2>PASSWORD</h2>
-              <input type="password" placeholder="Your password"></input>
-              <button className="submit">Register</button>
+              <input
+                type="password"
+                placeholder="Your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+              <button className="submit" onClick={handleClick}>
+                Register
+              </button>
             </div>
             <div className="columnas">
               <img
