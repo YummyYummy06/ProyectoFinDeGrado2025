@@ -77,21 +77,21 @@ function Register() {
               <h1 className="motivationText">TODAY!</h1>
             </div>
             <div className="columnas-Inputs">
-              <h2>USERNAME</h2>
+              <h2 className="titulo-campo">USERNAME</h2>
               <input
                 type="text"
                 placeholder="Your Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               ></input>
-              <h2>EMAIL</h2>
+              <h2 className="titulo-campo">EMAIL</h2>
               <input
                 type="email"
                 placeholder="YourEmail@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
-              <h2>PASSWORD</h2>
+              <h2 className="titulo-campo">PASSWORD</h2>
               <input
                 type="password"
                 placeholder="Your password"

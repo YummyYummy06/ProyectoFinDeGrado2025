@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
-
+* {
+  margin: 0;
+  padding: 0;
+}
 #root {
   max-width: 1280px;
   margin: 0;
@@ -7,7 +10,8 @@
   text-align: center;
   font-family: "Anton", sans-serif;
 }
-#inicio {
+#inicio,
+#contact {
   background-image: url("/images/background-inicio.jpg");
   background-size: cover; /* que la imagen cubra todo */
   background-position: center; /* centrar la imagen */
@@ -313,6 +317,14 @@
 .bttop:hover {
   color: #f4c430;
   background-color: black;
+}
+
+.contenedor-contacto {
+  height: 100vh;
+}
+.titulo-campo {
+  margin-top: 25px;
+  margin-bottom: 15px;
 }
 
 @media (max-width: 800px) {

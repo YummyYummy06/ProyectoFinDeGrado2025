@@ -8,7 +8,7 @@ function Contact() {
 
   return (
     <>
-      <div className="Contact">
+      <div id="contact">
         <header className="header-app">
           <div className="logo-titulo">
             <a href="http://localhost:5173/">
@@ -44,6 +44,7 @@ function Contact() {
             </ul>
           </menu>
         </header>
+        <div className="contenedor-contacto"></div>
       </div>
     </>
   );
