@@ -47,7 +47,9 @@ function Home() {
         <div className="pagina">
           <h1 className="slogan">SHAPE YOUR STORY</h1>
           <h3 className="subSlogan">- OWN YOUR JOURNEY -</h3>
-          <button className="btn">JOIN TODAY !</button>
+          <Link to="/register" className="btn-Join">
+            JOIN TODAY!
+          </Link>
         </div>
       </div>
     </>

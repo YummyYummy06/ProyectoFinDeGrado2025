@@ -102,7 +102,8 @@
   text-shadow: 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-.btn {
+.btn,
+.btn-Join {
   margin-top: 20px;
   font-size: 30px;
   background-color: #f4c430;
@@ -110,11 +111,16 @@
   outline: black solid 2px;
   border-radius: 10px;
 }
+.btn-Join {
+  padding: 20px;
+}
 
 .btn:hover,
-.submit:hover {
+.submit:hover,
+.btn-Join:hover {
   transform: scale(1.1);
   transition: transform 0.3s ease;
+  color: black;
 }
 
 .content {
