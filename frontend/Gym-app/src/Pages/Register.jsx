@@ -22,10 +22,7 @@ function Register() {
         console.log("Registro exitoso:", data);
         alert("Registro realizado con éxito!"); // mensaje rápido
 
-        // Espera 2 segundos antes de recargar
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000); // 2000ms = 2 segundos
+        window.location.reload();
       } else {
         console.error("Error en el registro");
       }
