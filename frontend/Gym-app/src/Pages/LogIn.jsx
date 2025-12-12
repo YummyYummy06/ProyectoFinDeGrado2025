@@ -4,7 +4,30 @@ import { useState } from "react";
 import "../App.css";
 
 function LogIn() {
+  const PORT = import.meta.env.VITE_PORT;
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleClick = async () => {
+    try {
+      const respuesta = await fetch(`http://localhost:${PORT}/user-login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await respuesta.json();
+      console.log("El servidor te manda esta respuesta:", data);
+      if (respuesta.ok) {
+        console.log("Log In exitoso:", data);
+        alert("Autenticación realizada con éxito!"); // mensaje rápido
+      } else {
+        console.error("Error en el registro");
+      }
+    } catch (error) {
+      console.error("Error en el fetch", error);
+    }
+  };
 
   return (
     <>
@@ -54,10 +77,22 @@ function LogIn() {
             </div>
             <div className="columnas-Inputs">
               <h2>EMAIL</h2>
-              <input type="email" placeholder="YourEmail@gmail.com"></input>
+              <input
+                type="email"
+                placeholder="YourEmail@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
               <h2>PASSWORD</h2>
-              <input type="password" placeholder="Your password"></input>
-              <button className="submit">Log In</button>
+              <input
+                type="password"
+                placeholder="Your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+              <button className="submit" onClick={handleClick}>
+                Log In
+              </button>
             </div>
             <div className="columnas">
               <img
