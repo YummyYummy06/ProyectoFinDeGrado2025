@@ -32,7 +32,7 @@ function Register() {
   };
   return (
     <>
-      <div className="Register">
+      <div id="Register">
         <header className="header-app">
           <div className="logo-titulo">
             <a href="http://localhost:5173/">

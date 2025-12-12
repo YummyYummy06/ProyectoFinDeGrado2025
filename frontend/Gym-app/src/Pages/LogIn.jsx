@@ -31,7 +31,7 @@ function LogIn() {
 
   return (
     <>
-      <div className="LogInPage">
+      <div id="LogInPage">
         <header className="header-app">
           <div className="logo-titulo">
             <a href="http://localhost:5173/">
@@ -67,7 +67,7 @@ function LogIn() {
             </ul>
           </menu>
         </header>
-        <div className="content-Register">
+        <div className="content-Login">
           <h1 className="encabezado">LOG IN</h1>
           <div className="tresColumnas">
             <div className="columnas">

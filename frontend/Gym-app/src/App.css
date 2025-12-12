@@ -15,6 +15,15 @@
   width: 100vw; /* ancho completo */
   height: 100vh; /* altura de toda la ventana */
 }
+#Register,
+#LogInPage {
+  background-image: url("/images/kettlesPhoto.jpg");
+  background-size: cover; /* que la imagen cubra todo */
+  background-position: center; /* centrar la imagen */
+  background-repeat: no-repeat; /* no repetir */
+  width: 100vw; /* ancho completo */
+  height: 100vh; /* altura de toda la ventana */
+}
 
 .logo-titulo {
   display: flex;
@@ -129,19 +138,14 @@
   height: 100vh; /* altura de toda la ventana */
   margin-top: 58px;
 }
-.content-Register {
-  text-align: center;
-  width: 100vw; /* ancho completo */
-  height: 100vh; /* altura de toda la ventana */
-  margin-top: 58px;
-  background-image: url("/images/kettlesPhoto.jpg");
-  background-size: cover; /* que la imagen cubra todo */
-  background-position: center; /* centrar la imagen */
-  background-repeat: no-repeat; /* no repetir */
+.content-Register,
+.content-Login {
+  padding-top: 20px;
 }
 
 .encabezado {
-  padding-top: 50px;
+  padding-top: 20px;
+  margin-top: 80px;
   color: #f4c430;
   font-style: italic;
 }
@@ -156,7 +160,6 @@
   gap: 20px; /* Espacio entre columnas */
   align-items: center;
   justify-content: center; /* Centra incluso cuando hay 1 o 2 columnas */
-
   margin-inline: 20px; /* Márgenes más pequeños en móviles */
 }
 
