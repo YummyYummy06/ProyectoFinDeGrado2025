@@ -171,7 +171,7 @@
 }
 
 .columnas-Inputs {
-  height: 400px; /* Para que pueda adaptarse */
+  height: 500px; /* Para que pueda adaptarse */
   width: 400px; /* Tamaño base */
   max-width: 100%; /* Que no exceda el ancho disponible */
   display: flex;
