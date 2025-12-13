@@ -80,7 +80,7 @@ function WhatWeDo() {
           </div>
         </div>
         <div className="content">
-          <div className="tresColumnas">
+          <div className="dosColumnas">
             <div className="columnas-info">
               <h1 className="encabezado-2"> THE CLUB - TEAM</h1>
               <h4 className="description-2">
@@ -94,14 +94,12 @@ function WhatWeDo() {
                 your best version.
               </h4>
             </div>
-            <div className="columnas">
+            <div className="columnas-dosFotos">
               <img
                 className="imagenColumna-foto1"
                 src="/images/workout1.png"
                 alt="workout1"
               ></img>
-            </div>
-            <div className="columnas">
               <img
                 className="imagenColumna-foto2"
                 src="/images/workout2.png"

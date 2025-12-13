@@ -1,10 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
+/* Variables CSS para consistencia */
+:root {
+  --primary-color: #f4c430;
+  --secondary-color: black;
+  --header-height: 70px;
+  --gap-small: 10px;
+  --gap-medium: 15px;
+  --gap-large: 20px;
+}
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -13,20 +32,20 @@
 #inicio,
 #contact {
   background-image: url("/images/background-inicio.jpg");
-  background-size: cover; /* que la imagen cubra todo */
-  background-position: center; /* centrar la imagen */
-  background-repeat: no-repeat; /* no repetir */
-  width: 100vw; /* ancho completo */
-  height: 100vh; /* altura de toda la ventana */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
 }
 #Register,
 #LogInPage {
   background-image: url("/images/kettlesPhoto.jpg");
-  background-size: cover; /* que la imagen cubra todo */
-  background-position: center; /* centrar la imagen */
-  background-repeat: no-repeat; /* no repetir */
-  width: 100vw; /* ancho completo */
-  height: 100vh; /* altura de toda la ventana */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .logo-titulo {
@@ -40,22 +59,25 @@
 
 .header-app {
   display: flex;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   top: 0;
-  padding-inline: 50px;
+  padding-inline: clamp(15px, 5vw, 50px);
   border-bottom: black solid 2px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
   justify-content: space-between;
   align-items: center;
-  z-index: 1000; /*Para que siempre se vea*/
+  z-index: 1000;
+  box-sizing: border-box;
+  height: var(--header-height);
 }
 
 .header-titulo {
-  font-size: 3vh;
+  font-size: clamp(1.2rem, 3vw, 2rem);
   text-align: center;
-  transition: transform 0.3s ease; /* suaviza la animación */
+  transition: transform 0.3s ease;
+  white-space: nowrap;
 }
 .header-titulo:hover {
   transform: scale(1.07);
@@ -77,14 +99,15 @@
   transform: scale(1.3);
 }
 .header-logo {
-  height: 50px;
-  transition: transform 0.3s ease; /* suaviza la animación */
+  height: clamp(30px, 8vw, 50px);
+  transition: transform 0.3s ease;
+  width: auto;
 }
 .menu-app {
   width: 50%;
   padding: 0;
   align-content: center;
-  margin-right: 50px;
+  margin-right: clamp(15px, 3vw, 50px);
   transition: transform 0.3s ease;
 }
 
@@ -105,27 +128,29 @@
 }
 
 .slogan {
-  font-size: 150px;
+  font-size: clamp(3rem, 15vw, 150px);
   margin: 0;
-  text-shadow: 15px 15px rgba(0, 0, 0, 0.5);
+  text-shadow: clamp(5px, 2vw, 15px) clamp(5px, 2vw, 15px) rgba(0, 0, 0, 0.5);
 }
 .subSlogan {
-  font-size: 20px;
+  font-size: clamp(1rem, 4vw, 20px);
   margin: 0;
-  text-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+  text-shadow: clamp(2px, 1vw, 5px) clamp(2px, 1vw, 5px) rgba(0, 0, 0, 0.5);
 }
 
 .btn,
 .btn-Join {
-  margin-top: 20px;
-  font-size: 30px;
+  margin-top: clamp(10px, 3vw, 20px);
+  font-size: clamp(1rem, 5vw, 30px);
   background-color: #f4c430;
   color: black;
   outline: black solid 2px;
   border-radius: 10px;
+  cursor: pointer;
+  border: none;
 }
 .btn-Join {
-  padding: 20px;
+  padding: clamp(10px, 3vw, 20px);
 }
 
 .btn:hover,
@@ -138,9 +163,11 @@
 
 .content {
   text-align: center;
-  width: 100vw; /* ancho completo */
-  height: 100vh; /* altura de toda la ventana */
-  margin-top: 58px;
+  width: 100%;
+  min-height: 100vh;
+  margin-top: var(--header-height);
+  padding: clamp(10px, 3vw, 30px);
+  box-sizing: border-box;
 }
 .content-Register,
 .content-Login {
@@ -148,14 +175,18 @@
 }
 
 .encabezado {
-  padding-top: 20px;
-  margin-top: 80px;
+  padding-top: clamp(10px, 3vw, 20px);
+  margin-top: clamp(40px, 10vh, 80px);
   color: #f4c430;
   font-style: italic;
+  font-size: clamp(3.5rem, 8vw, 4.5rem);
+  margin-bottom: clamp(40px, 10vh, 80px);
 }
 .encabezado-2 {
   color: #f4c430;
   text-align: left;
+  font-size: clamp(3.5rem, 8vw, 4.5rem);
+  margin-bottom: clamp(40px, 10vh, 80px);
 }
 
 .tresColumnas {
@@ -169,14 +200,18 @@
 
 .columnas,
 .columnas2 {
-  height: auto; /* Para que pueda adaptarse */
-  width: 400px; /* Tamaño base */
-  max-width: 100%; /* Que no exceda el ancho disponible */
+  height: auto;
+  width: clamp(200px, 90vw, 400px);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .columnas2 {
   background-color: #f4c430;
   color: black;
+  min-height: clamp(300px, 70vh, 500px);
 }
 .columnas2:hover {
   background-color: black;
@@ -184,24 +219,28 @@
 }
 
 .columnas-Inputs {
-  height: 500px; /* Para que pueda adaptarse */
-  width: 400px; /* Tamaño base */
-  max-width: 100%; /* Que no exceda el ancho disponible */
+  height: auto;
+  min-height: clamp(300px, 80vh, 500px);
+  width: clamp(200px, 90vw, 400px);
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  padding: clamp(10px, 3vw, 20px);
 }
 
 .columnas-Inputs input {
-  width: 300px;
-  height: 50px;
+  width: clamp(150px, 80vw, 300px);
+  height: clamp(35px, 8vh, 50px);
   background-color: rgba(255, 255, 255, 0.498);
   border: 0;
   color: black;
   font-weight: bolder;
-  font-size: larger;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   text-align: center;
+  margin: clamp(5px, 2vw, 10px) 0;
 }
 
 .columnas-Inputs input::placeholder {
@@ -214,20 +253,20 @@
 }
 
 .imagenColumna {
-  width: 100%; /* La imagen se adapta al contenedor */
-  height: 400px;
-  object-fit: cover; /* Recorta para mantener proporción sin deformar */
+  width: 100%;
+  height: clamp(200px, 50vh, 400px);
+  object-fit: cover;
 }
 .imagenColumna2 {
-  width: 100%; /* La imagen se adapta al contenedor */
-  height: 300px;
-  object-fit: cover; /* Recorta para mantener proporción sin deformar */
+  width: 100%;
+  height: clamp(150px, 40vh, 300px);
+  object-fit: cover;
 }
 
 .imagenColumna-logo {
-  width: 100%; /* La imagen se adapta al contenedor */
-  height: 400px;
-  object-fit: cover; /* Recorta para mantener proporción sin deformar */
+  width: 100%;
+  height: clamp(200px, 50vh, 400px);
+  object-fit: cover;
 }
 
 .imagenColumna:hover {
@@ -235,40 +274,75 @@
 }
 
 .imagenColumna-foto {
-  width: 100%; /* La imagen se adapta al contenedor */
-  height: 500px;
+  width: 100%;
+  height: clamp(250px, 60vh, 500px);
   object-fit: cover;
 }
 .imagenColumna-foto1 {
-  width: 300px; /* La imagen se adapta al contenedor */
-  height: 500px;
+  width: clamp(150px, 80vw, 300px);
+  height: clamp(250px, 60vh, 500px);
   object-fit: cover;
-  padding-left: 100px;
-  padding-bottom: 200px;
+  /* Efecto óptico: perspectiva 3D con rotación */
+  transform: perspective(1000px) rotateY(-8deg) rotateX(2deg);
+  transition: transform 0.4s ease;
+  filter: drop-shadow(-8px 8px 16px rgba(0, 0, 0, 0.3));
+  border-radius: 8px;
 }
-.imagenColumna-foto2 {
-  width: 300px; /* La imagen se adapta al contenedor */
-  height: 500px;
-  object-fit: cover;
 
-  padding-top: 200px;
+.imagenColumna-foto1:hover {
+  transform: perspective(1000px) rotateY(-2deg) rotateX(0deg) scale(1.05);
+  filter: drop-shadow(-12px 12px 20px rgba(0, 0, 0, 0.4));
+}
+
+.imagenColumna-foto2 {
+  width: clamp(150px, 80vw, 300px);
+  height: clamp(250px, 60vh, 500px);
+  object-fit: cover;
+  /* Efecto óptico: perspectiva 3D con rotación inversa */
+  transform: perspective(1000px) rotateY(8deg) rotateX(2deg);
+  transition: transform 0.4s ease;
+  filter: drop-shadow(8px 8px 16px rgba(0, 0, 0, 0.3));
+  border-radius: 8px;
+}
+
+.imagenColumna-foto2:hover {
+  transform: perspective(1000px) rotateY(2deg) rotateX(0deg) scale(1.05);
+  filter: drop-shadow(12px 12px 20px rgba(0, 0, 0, 0.4));
 }
 
 .columnas-info {
-  width: 500px;
-  height: 600px;
+  width: clamp(250px, 80vw, 1000px);
+  height: auto;
+  padding: clamp(10px, 3vw, 20px);
+  align-content: center;
+}
+.columnas-dosFotos {
+  width: clamp(250px, 45vw, 600px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(20px, 3vw, 50px);
+  margin-right: clamp(10px, 2vw, 20px);
+}
+.dosColumnas {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .description {
-  margin-bottom: 50px;
+  margin-bottom: clamp(20px, 5vw, 50px);
 }
 .description-2 {
   text-align: left;
-  font-size: 25px;
+  font-size: clamp(1rem, 4vw, 25px);
+  line-height: 1.5;
 }
 .description-3 {
   text-align: left;
-  margin-inline: 25px;
+  margin-inline: clamp(10px, 5vw, 25px);
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
 }
 
 .motivationText {
@@ -278,24 +352,33 @@
 .subtittle {
   text-align: left;
   margin-left: 30px;
+  padding-bottom: 15px;
 }
 .submit {
-  margin-top: 25px;
+  margin-top: clamp(15px, 3vw, 25px);
   background-color: #f4c430;
   color: black;
   outline: black solid 2px;
-  width: 150px;
+  width: clamp(100px, 40vw, 150px);
+  padding: clamp(8px, 2vw, 12px);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
 }
 
 .footer-app {
-  width: 100vw;
+  width: 100%;
   height: 100%;
   background-color: #f4c430;
   color: black;
+  box-sizing: border-box;
+  padding: clamp(10px, 3vw, 20px);
 }
 .footer-app h1,
 .footer-app p {
-  margin: 10px;
+  margin: clamp(5px, 2vw, 10px);
+  font-size: clamp(1rem, 3vw, 1.5rem);
 }
 
 .link-info {
@@ -307,12 +390,16 @@
 
 .bttop {
   position: fixed;
-  bottom: 80px;
-  right: 20px;
+  bottom: clamp(60px, 10vh, 80px);
+  right: clamp(10px, 3vw, 20px);
   background-color: #f4c430;
-  padding: 20px;
+  padding: clamp(12px, 2vw, 20px);
   border-radius: 30px;
   color: black;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  cursor: pointer;
+  border: none;
+  z-index: 500;
 }
 .bttop:hover {
   color: #f4c430;
@@ -368,25 +455,26 @@
 
   /* Título más pequeño en móvil */
   .header-titulo {
-    font-size: 2vh;
+    font-size: clamp(1rem, 2vw, 1.5rem);
   }
 
   .header-logo {
-    height: 40px;
+    height: clamp(30px, 6vw, 40px);
   }
 
   .header-app {
-    padding-inline: 20px;
+    padding-inline: clamp(15px, 3vw, 20px);
+    height: 60px;
   }
   .content,
   .content-Register {
     height: auto;
-    margin-top: 20px;
+    margin-top: clamp(10px, 3vw, 20px);
     padding-bottom: 20px;
   }
 
   .content {
-    margin-top: 58px;
+    margin-top: clamp(50px, 12vw, 70px);
   }
 
   /* Apilar columnas verticalmente */
@@ -431,6 +519,230 @@
   }
 
   .columnas-Inputs input {
-    width: 90%; /* ocupa casi todo el ancho en móvil */
+    width: 90%;
+  }
+}
+
+/* Tablets - 801px a 1024px */
+@media (min-width: 801px) and (max-width: 1024px) {
+  .header-app {
+    padding-inline: clamp(20px, 4vw, 40px);
+  }
+
+  .header-titulo {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  }
+
+  .header-logo {
+    height: clamp(40px, 7vw, 50px);
+  }
+
+  .menu-app {
+    margin-right: clamp(15px, 3vw, 40px);
+  }
+
+  .slogan {
+    font-size: clamp(2.5rem, 12vw, 100px);
+  }
+
+  .subSlogan {
+    font-size: clamp(1rem, 3.5vw, 18px);
+  }
+
+  .tresColumnas {
+    gap: clamp(15px, 3vw, 25px);
+  }
+
+  .columnas,
+  .columnas2 {
+    width: clamp(250px, 85vw, 380px);
+  }
+
+  .columnas-Inputs {
+    width: clamp(250px, 85vw, 380px);
+    min-height: clamp(300px, 75vh, 450px);
+  }
+
+  .encabezado {
+    font-size: clamp(1.3rem, 5vw, 2.2rem);
+  }
+
+  .encabezado-2 {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+  }
+
+  .description-2 {
+    font-size: clamp(1rem, 3.5vw, 20px);
+  }
+
+  .imagenColumna {
+    height: clamp(200px, 45vh, 380px);
+  }
+
+  .imagenColumna2 {
+    height: clamp(150px, 35vh, 280px);
+  }
+}
+
+/* Pantallas medianas - 600px a 800px */
+@media (min-width: 600px) and (max-width: 800px) {
+  .slogan {
+    font-size: clamp(2rem, 12vw, 80px);
+  }
+
+  .subSlogan {
+    font-size: clamp(0.9rem, 3vw, 16px);
+  }
+
+  .tresColumnas {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: clamp(12px, 2vw, 18px);
+  }
+
+  .columnas,
+  .columnas2 {
+    width: clamp(180px, 45vw, 300px);
+  }
+
+  .columnas-Inputs {
+    width: clamp(180px, 45vw, 300px);
+    min-height: clamp(280px, 70vh, 400px);
+  }
+
+  .columnas-Inputs input {
+    width: clamp(130px, 75vw, 250px);
+    height: clamp(32px, 7vh, 45px);
+  }
+
+  .encabezado {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    margin-top: clamp(30px, 8vh, 60px);
+  }
+
+  .encabezado-2 {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+  }
+
+  .description-2 {
+    font-size: clamp(0.95rem, 3vw, 18px);
+  }
+
+  .imagenColumna {
+    height: clamp(180px, 40vh, 320px);
+  }
+
+  .imagenColumna2 {
+    height: clamp(130px, 30vh, 240px);
+  }
+}
+
+/* Pantallas pequeñas - menos de 600px */
+@media (max-width: 599px) {
+  .header-app {
+    height: clamp(50px, 12vw, 60px);
+  }
+
+  .header-titulo {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+  }
+
+  .header-logo {
+    height: clamp(25px, 6vw, 35px);
+  }
+
+  .menu-app {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .slogan {
+    font-size: clamp(1.8rem, 10vw, 60px);
+  }
+
+  .subSlogan {
+    font-size: clamp(0.85rem, 2.5vw, 14px);
+  }
+
+  .btn,
+  .btn-Join {
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
+    margin-top: clamp(8px, 2vw, 15px);
+  }
+
+  .tresColumnas {
+    flex-direction: column;
+    gap: clamp(10px, 2vw, 12px);
+    margin-inline: clamp(5px, 2vw, 10px);
+  }
+
+  .columnas,
+  .columnas2 {
+    width: 100%;
+    max-width: calc(100vw - 20px);
+  }
+
+  .columnas-Inputs {
+    width: 100%;
+    max-width: calc(100vw - 20px);
+    min-height: clamp(250px, 65vh, 350px);
+  }
+
+  .columnas-Inputs input {
+    width: clamp(120px, 85vw, 200px);
+    height: clamp(30px, 6vh, 40px);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+  }
+
+  .encabezado {
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+    margin-top: clamp(20px, 6vh, 40px);
+  }
+
+  .encabezado-2 {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+
+  .description {
+    margin-bottom: clamp(15px, 4vw, 30px);
+  }
+
+  .description-2 {
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+  }
+
+  .description-3 {
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    margin-inline: clamp(8px, 3vw, 15px);
+  }
+
+  .imagenColumna {
+    height: clamp(150px, 35vh, 250px);
+  }
+
+  .imagenColumna2 {
+    height: clamp(120px, 25vh, 200px);
+  }
+
+  .imagenColumna-foto {
+    height: clamp(200px, 50vh, 350px);
+  }
+
+  .imagenColumna-foto1,
+  .imagenColumna-foto2 {
+    height: clamp(200px, 100vh, 350px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .submit {
+    width: clamp(90px, 35vw, 130px);
+    padding: clamp(6px, 1.5vw, 10px);
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  }
+
+  .bttop {
+    padding: clamp(10px, 1.5vw, 16px);
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
   }
 }

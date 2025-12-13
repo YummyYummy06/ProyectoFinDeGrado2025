@@ -24,7 +24,8 @@ function Register() {
 
         window.location.reload();
       } else {
-        console.error("Error en el registro");
+        console.log("Error en el registro");
+        alert("Fallo en el registro");
       }
     } catch (error) {
       console.error("Error en el fetch", error);
