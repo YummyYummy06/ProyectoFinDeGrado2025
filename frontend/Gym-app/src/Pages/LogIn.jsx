@@ -20,9 +20,10 @@ function LogIn() {
       console.log("El servidor te manda esta respuesta:", data);
       if (respuesta.ok) {
         console.log("Log In exitoso:", data);
-        alert("Autenticación realizada con éxito!"); // mensaje rápido
+        alert(`Autenticación realizada con éxito!, Bienvenido ${data}`); // mensaje rápido
       } else {
-        console.error("Error en el registro");
+        console.error(`Error en el login: ${data.error}`);
+        alert(`Fallo en el login: ${data.error}`);
       }
     } catch (error) {
       console.error("Error en el fetch", error);

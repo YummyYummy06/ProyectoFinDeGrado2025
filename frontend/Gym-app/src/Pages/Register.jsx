@@ -22,10 +22,10 @@ function Register() {
         console.log("Registro exitoso:", data);
         alert("Registro realizado con éxito!"); // mensaje rápido
 
-        window.location.reload();
+        window.location.href = "/logIn";
       } else {
         console.log("Error en el registro");
-        alert("Fallo en el registro");
+        alert(`Fallo en el registro: ${data.error}`);
       }
     } catch (error) {
       console.error("Error en el fetch", error);
