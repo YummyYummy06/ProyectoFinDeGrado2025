@@ -408,10 +408,43 @@ body {
 
 .contenedor-contacto {
   height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-inline: clamp(10px, 5vw, 25px);
+  gap: clamp(20px, 5vw, 40px);
+  padding-top: 80px;
 }
-.titulo-campo {
-  margin-top: 25px;
-  margin-bottom: 15px;
+.info-contacto {
+  color: var(--primary-color);
+}
+
+.columnaContacto,
+.columnaContacto-1 {
+  width: 100%;
+}
+.columnaContacto-1 {
+  background-color: rgba(0, 0, 0, 0.405);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 50px;
+}
+
+.info-link {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.mapa {
+  width: 100%;
+  max-width: clamp(300px, 80vw, 600px);
+  height: clamp(250px, 60vh, 450px);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.405);
+}
+.info-contacto {
+  font-size: clamp(3.5rem, 8vw, 4.5rem);
 }
 
 @media (max-width: 800px) {
@@ -494,15 +527,22 @@ body {
     height: 100%;
   }
 
-  /* Ajustar imágenes */
-  .imagenColumna,
-  .imagenColumna-foto,
-  .imagenColumna-foto1,
-  .imagenColumna-foto2 {
-    width: 100%;
+  .contenedor-contacto {
+    flex-direction: column;
     height: auto;
-    object-fit: cover;
-    padding: 0; /* elimina padding excesivo en móvil */
+    min-height: 100vh;
+    gap: clamp(30px, 8vw, 50px);
+  }
+
+  .columanContacto {
+    width: 100%;
+    padding: clamp(15px, 4vw, 30px);
+  }
+
+  .mapa {
+    width: 100%;
+    max-width: 100%;
+    height: clamp(300px, 70vh, 500px);
   }
 
   /* Ajustar texto */
