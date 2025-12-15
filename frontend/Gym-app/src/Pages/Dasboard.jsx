@@ -9,6 +9,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [unauthorized, setUnauthorized] = useState(false);
   const [taquillas, setTaquillas] = useState([]);
+  const [email, setEmail] = useState("");
 
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -58,6 +59,14 @@ function Dashboard() {
         setLoading(false);
       });
   }, []);
+  const reservarClase = async () => {
+    fetch(`http://localhost:${PORT}/apuntarse-clase`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, id_Clase }),
+    });
+  };
 
   return (
     <>
