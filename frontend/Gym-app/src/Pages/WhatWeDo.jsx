@@ -45,7 +45,7 @@ function WhatWeDo() {
         </header>
 
         <div className="content">
-          <h1 className="encabezado">What We Do</h1>
+          <h1 className="encabezado-1">What We Do</h1>
           <h4 className="description">
             We’re committed to providing you with the best training experience.
           </h4>
@@ -109,7 +109,7 @@ function WhatWeDo() {
           </div>
         </div>
         <div className="content">
-          <h1 className="encabezado">BEYOND THE RING</h1>
+          <h1 className="encabezado-1">BEYOND THE RING</h1>
           <div className="tresColumnas">
             <div className="columnas2">
               <img

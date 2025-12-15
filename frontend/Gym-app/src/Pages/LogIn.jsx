@@ -8,12 +8,14 @@ function LogIn() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
 
   const handleClick = async () => {
     try {
       const respuesta = await fetch(`http://localhost:${PORT}/user-login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
       const data = await respuesta.json();
@@ -21,6 +23,7 @@ function LogIn() {
       if (respuesta.ok) {
         console.log("Log In exitoso:", data);
         alert(`Autenticación realizada con éxito!, Bienvenido ${data}`); // mensaje rápido
+        window.location.href = "/dashboard"; // redirigir al usuario al Dashboard
       } else {
         console.error(`Error en el login: ${data.error}`);
         alert(`Fallo en el login: ${data.error}`);

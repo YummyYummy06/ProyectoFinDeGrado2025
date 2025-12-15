@@ -24,7 +24,10 @@ const PORT = process.env.PORT || 3000;
 
 
 //Middleware
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}))
 app.use(express.json());
 app.use(cookieParser());
 app.use("/", googleAuthRoutes);
@@ -56,7 +59,7 @@ app.delete('/user-delete-all', handleUsuario.eliminarTodosUsuarios);
 
 // Clase
 
-app.get('/get-class', handleClase.verClases);
+app.get('/get-class', verifyToken, handleClase.verClases);
 
 app.post('/create-class', handleClase.crearClase);
 

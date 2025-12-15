@@ -22,7 +22,7 @@ function Register() {
         console.log("Registro exitoso:", data);
         alert("Registro realizado con éxito!"); // mensaje rápido
 
-        window.location.href = "/logIn";
+        window.location.href = "/login";
       } else {
         console.log("Error en el registro");
         alert(`Fallo en el registro: ${data.error}`);
