@@ -202,7 +202,9 @@ function Dashboard() {
           ) : (
             <>
               <h2 className="encabezado">Welcome to your Dashboard !</h2>
-              <p>Haz click en la clase o taquilla que quieras reservar</p>
+              <p className="important-info">
+                Haz click en la clase o taquilla que quieras reservar
+              </p>
               <div className="dosColumnas">
                 <div className="columnas-dashboard">
                   <h2 className="encabezado-dashboard">Clases disponibles</h2>

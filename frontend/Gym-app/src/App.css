@@ -503,6 +503,31 @@ body {
 .classes-grid {
   display: block;
 }
+.important-info {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin: clamp(10px, 2vw, 50px);
+  font-weight: bold;
+
+  /* Animación */
+  animation: pulse 2s infinite;
+  display: inline-block; /* importante para que pulse */
+}
+
+/* Animación “pulse” */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    color: violet;
+  }
+  50% {
+    transform: scale(1.2); /* se agranda */
+    color: cyan;
+  }
+  100% {
+    transform: scale(1); /* vuelve al tamaño normal */
+    color: greenyellow;
+  }
+}
 
 @media (max-width: 800px) {
   .menu-app ul {
