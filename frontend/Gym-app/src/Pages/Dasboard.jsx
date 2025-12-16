@@ -9,7 +9,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [unauthorized, setUnauthorized] = useState(false);
   const [taquillas, setTaquillas] = useState([]);
-  const [email, setEmail] = useState("");
+  const email = localStorage.getItem("userEmail"); // Recupero el email guardado en localStorage
 
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -59,13 +59,24 @@ function Dashboard() {
         setLoading(false);
       });
   }, []);
-  const reservarClase = async () => {
-    fetch(`http://localhost:${PORT}/apuntarse-clase`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, id_Clase }),
-    });
+  const reservarClase = async (cls) => {
+    try {
+      const res = await fetch(`http://localhost:${PORT}/apuntarse-clase`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, id_Clase: cls.id }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(`Te has apuntado correctamente a la clase: ${cls.name}`);
+      } else {
+        alert(`Error al apuntarse a la clase: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Error en el servidor", error);
+    }
   };
 
   return (
@@ -129,9 +140,10 @@ function Dashboard() {
                       <div
                         key={cls.id}
                         className="class-card"
-                        onClick={() =>
-                          alert(`Has seleccionado la clase: ${cls.name}`)
-                        }
+                        onClick={() => {
+                          alert(`Has seleccionado la clase: ${cls.name}`);
+                          reservarClase(cls);
+                        }}
                       >
                         <h3 className="nombre-clase">{cls.name}</h3>
                         <p className="datos-clases">

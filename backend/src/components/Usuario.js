@@ -79,7 +79,7 @@ const logearUsuario = async (req, res) => {
 
 
         console.log('Login exitoso para el usuario:', user, token);
-        res.cookie('authToken', token, { httpOnly: true }).json(`El usuario ${user.name} ha iniciado sesión con éxito`);
+        res.cookie('authToken', token, { httpOnly: true }).json({ message: `El usuario ${user.name} ha iniciado sesión con éxito`, email: user.email });
     }
     catch (error) {
 

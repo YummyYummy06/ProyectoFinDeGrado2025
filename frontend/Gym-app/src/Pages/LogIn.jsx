@@ -22,7 +22,8 @@ function LogIn() {
       console.log("El servidor te manda esta respuesta:", data);
       if (respuesta.ok) {
         console.log("Log In exitoso:", data);
-        alert(`Autenticación realizada con éxito!, Bienvenido ${data}`); // mensaje rápido
+        alert(`Autenticación realizada con éxito!, Bienvenido ${data.message}`); // mensaje rápido
+        localStorage.setItem("userEmail", data.email); // guardar email en localStorage
         window.location.href = "/dashboard"; // redirigir al usuario al Dashboard
       } else {
         console.error(`Error en el login: ${data.error}`);
