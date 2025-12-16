@@ -219,7 +219,7 @@ body {
   width: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: clamp(15px, 3vw, 30px);
 }

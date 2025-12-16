@@ -10,32 +10,11 @@ function Dashboard() {
   const [unauthorized, setUnauthorized] = useState(false);
   const [taquillas, setTaquillas] = useState([]);
   const email = localStorage.getItem("userEmail"); // Recupero el email guardado en localStorage
+  const [mensajeTaquilla, setMensajeTaquilla] = useState("");
 
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    fetch(`http://localhost:${PORT}/get-class`, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((res) => {
-        if (res.status === 401) {
-          setUnauthorized(true);
-          setLoading(false);
-          return;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (data) {
-          setClases(data);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error(err, `Error al obtener clases disponibles`);
-        setLoading(false);
-      });
 
+  const loadTaquillas = () => {
     fetch(`http://localhost:${PORT}/get-taquillas`, {
       method: "GET",
       credentials: "include",
@@ -58,7 +37,31 @@ function Dashboard() {
         console.error(err, `Error al obtener taquillas disponibles`);
         setLoading(false);
       });
-  }, []);
+  };
+  const loadClases = () => {
+    fetch(`http://localhost:${PORT}/get-class`, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          setUnauthorized(true);
+          setLoading(false);
+          return;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          setClases(data);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error(err, `Error al obtener clases disponibles`);
+        setLoading(false);
+      });
+  };
   const reservarClase = async (cls) => {
     try {
       const res = await fetch(`http://localhost:${PORT}/apuntarse-clase`, {
@@ -78,6 +81,50 @@ function Dashboard() {
       console.error("Error en el servidor", error);
     }
   };
+  const reservarTaquilla = async (taquilla) => {
+    try {
+      const res = await fetch(`http://localhost:${PORT}/taquilla-reservar`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, id_taquilla: taquilla.id }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert(`Taquilla reservada con éxito: ${data.message}`);
+        loadTaquillas(); // Recargar taquillas para mostrar cambios
+      } else {
+        alert(`Error al reservar taquilla: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Error en el servidor", error);
+      alert("Error en el servidor", error);
+    }
+  };
+  const verMiTaquilla = async () => {
+    try {
+      const res = await fetch(`http://localhost:${PORT}/taquilla-get-mine`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMensajeTaquilla(data.message);
+      } else {
+        alert(`Error al ver tu taquilla: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Error en el servidor", error);
+      alert("Error en el servidor", error);
+    }
+  };
+
+  useEffect(() => {
+    loadClases();
+    loadTaquillas();
+  }, []);
 
   return (
     <>
@@ -132,6 +179,7 @@ function Dashboard() {
           ) : (
             <>
               <h2 className="encabezado">Welcome to your Dashboard !</h2>
+              <p>Haz click en la clase o taquilla que quieras reservar</p>
               <div className="dosColumnas">
                 <div className="columnas-dashboard">
                   <h2 className="encabezado-dashboard">Clases disponibles</h2>
@@ -141,7 +189,6 @@ function Dashboard() {
                         key={cls.id}
                         className="class-card"
                         onClick={() => {
-                          alert(`Has seleccionado la clase: ${cls.name}`);
                           reservarClase(cls);
                         }}
                       >
@@ -172,9 +219,9 @@ function Dashboard() {
                       <div
                         key={taquilla.id}
                         className="taquilla-card"
-                        onClick={() =>
-                          alert(`Has seleccionado la taquilla: ${taquilla.id}`)
-                        }
+                        onClick={() => {
+                          reservarTaquilla(taquilla);
+                        }}
                       >
                         <h3 className="nombre-clase">
                           {" "}
@@ -187,6 +234,13 @@ function Dashboard() {
                       </div>
                     ))}
                   </div>
+                  <h2 className="encabezado-dashboard">
+                    ¿Cual es mi taquilla?
+                  </h2>
+                  <button className="btn" onClick={verMiTaquilla}>
+                    Ver mis reservas
+                  </button>
+                  <p>{mensajeTaquilla}</p>
                 </div>
               </div>
             </>
