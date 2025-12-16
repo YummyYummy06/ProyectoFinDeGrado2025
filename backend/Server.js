@@ -61,6 +61,8 @@ app.delete('/user-delete-all', handleUsuario.eliminarTodosUsuarios);
 
 app.get('/get-class', verifyToken, handleClase.verClases);
 
+app.get('/get-my-classes', verifyToken, apuntarse.verClasesApuntadas);
+
 app.post('/create-class', handleClase.crearClase);
 
 app.put('/edit-class/:id', handleClase.editarClase);

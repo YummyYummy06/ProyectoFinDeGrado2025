@@ -54,6 +54,32 @@ const apuntarseAunaClase = async (req, res) => {
     }
 };
 
+const verClasesApuntadas = async (req, res) => {
+    console.log('Entrando en /get-my-classes');
+    try {
+        const email = req.user.email; // Obtener email del token verificado
+
+        // Buscar usuario por email
+        const user = await prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            return res.status(404).json({ error: `No se ha encontrado ningún usuario registrado con email: ${email}` });
+        }
+
+        // Obtener clases apuntadas
+        const clasesApuntadas = await prisma.user_Clase.findMany({
+            where: { id_User: user.id }
+        });
+
+        return res.status(200).json({ message: "Estas sapuntado a estas clases:", clases: clasesApuntadas });
+    }
+    catch (error) {
+        console.error('Error obteniendo clases apuntadas:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 export default {
-    apuntarseAunaClase
+    apuntarseAunaClase,
+    verClasesApuntadas
 };

@@ -11,6 +11,8 @@ function Dashboard() {
   const [taquillas, setTaquillas] = useState([]);
   const email = localStorage.getItem("userEmail"); // Recupero el email guardado en localStorage
   const [mensajeTaquilla, setMensajeTaquilla] = useState("");
+  const [mensajeClase, setMensajeClase] = useState("");
+  const [misClases, setmisClases] = useState([]);
 
   const [open, setOpen] = useState(false);
 
@@ -81,6 +83,27 @@ function Dashboard() {
       console.error("Error en el servidor", error);
     }
   };
+
+  const verMisClases = async () => {
+    try {
+      const res = await fetch(`http://localhost:${PORT}/get-my-classes`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMensajeClase(data.message);
+        setmisClases(data.clases);
+      } else {
+        alert(`Error al ver tus clases: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Error en el servidor", error);
+      alert("Error en el servidor", error);
+    }
+  };
+
   const reservarTaquilla = async (taquilla) => {
     try {
       const res = await fetch(`http://localhost:${PORT}/taquilla-reservar`, {
@@ -204,6 +227,23 @@ function Dashboard() {
                         </p>
                         <p className="datos-clases">
                           <strong>Aforo:</strong> {cls.aforo}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <h2 className="encabezado-dashboard">
+                    ¿Donde estoy apuntado?
+                  </h2>
+                  <button className="btn" onClick={verMisClases}>
+                    Ver mis reservas
+                  </button>
+                  <p>{mensajeClase}</p>
+                  <div className="classes-apuntadas-grid">
+                    {misClases.map((mcls) => (
+                      <div key={mcls.id} className="class-card">
+                        <h3 className="nombre-clase">{mcls.className}</h3>
+                        <p className="datos-clases">
+                          <strong>Date:</strong> {mcls.time}
                         </p>
                       </div>
                     ))}
