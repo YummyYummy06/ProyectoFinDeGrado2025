@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import LogOutButton from "../components/botonLogout.jsx";
 
 import "../App.css";
 
@@ -168,12 +169,15 @@ function PersonalDashboard() {
               <h1>Personal Dashboard</h1>
               <div className="caja-dosColumnas">
                 <div className="columna-11">
-                  <h2>Bienvenido {name}</h2>
-                  <h3>Tus Próximas clases</h3>
-                  <div className="gid-misClases">
-                    <p>{mensajeClase}</p>
+                  <h2 className="titulo-dashboard">
+                    ¡ Bienvenido <span className="nombre-usuario">{name}</span>{" "}
+                    !
+                  </h2>
+                  <h3 className="mensaje-clase">- Tus Próximas clases -</h3>
+                  <div className="grid-misClases">
+                    <p className="mensaje-clase">{mensajeClase}</p>
                     {misClases.map((mcls) => (
-                      <div key={mcls.id}>
+                      <div className="cadaClase" key={mcls.id}>
                         <h3 className="titulo-lista">{mcls.className}</h3>
                         <p className="datos-lista">
                           Fecha:{soloFecha(mcls.time)}
@@ -191,7 +195,7 @@ function PersonalDashboard() {
                   </div>
                 </div>
                 <div className="columna-12">
-                  <h2>Clases disponibles</h2>
+                  <h2 className="titulo-dashboard">Clases disponibles</h2>
                   <div className="grid-clases">
                     {clases.map((cls) => (
                       <div
@@ -217,6 +221,7 @@ function PersonalDashboard() {
               </div>
             </>
           )}
+          <LogOutButton />
         </div>
       </div>
     </>
