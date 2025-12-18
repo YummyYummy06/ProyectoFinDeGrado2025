@@ -16,6 +16,7 @@ function LogOutButton() {
           // Limpiar el almacenamiento local
           localStorage.removeItem("userName");
           localStorage.removeItem("userEmail");
+          alert("Sesión cerrada correctamente");
           // Redirigir al usuario a la página de inicio de sesión
           window.location.href = "/login";
         } else {

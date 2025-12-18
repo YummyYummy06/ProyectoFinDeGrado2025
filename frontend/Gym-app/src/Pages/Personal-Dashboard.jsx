@@ -36,6 +36,7 @@ function PersonalDashboard() {
 
       if (res.ok) {
         alert(`Te has apuntado correctamente a la clase: ${cls.name}`);
+        window.location.reload();
       } else {
         alert(`Error al apuntarse a la clase: ${data.error}`);
       }
@@ -219,9 +220,9 @@ function PersonalDashboard() {
                   </div>
                 </div>
               </div>
+              <LogOutButton />
             </>
           )}
-          <LogOutButton />
         </div>
       </div>
     </>

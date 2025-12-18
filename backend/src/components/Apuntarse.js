@@ -71,8 +71,8 @@ const verClasesApuntadas = async (req, res) => {
             where: { id_User: user.id }
         });
 
-        if (!clasesApuntadas) {
-            return res.status(404).json({ message: 'No estás apuntado a ninguna clase' });
+        if (clasesApuntadas.length === 0) {
+            return res.status(200).json({ message: 'No estás apuntado a ninguna clase', clases: [] });
         }
         return res.status(200).json({ message: "Estas apuntado a estas clases:", clases: clasesApuntadas });
     }
