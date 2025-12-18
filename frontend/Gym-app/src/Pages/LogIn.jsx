@@ -24,7 +24,8 @@ function LogIn() {
         console.log("Log In exitoso:", data);
         alert(`Autenticación realizada con éxito!, Bienvenido ${data.message}`); // mensaje rápido
         localStorage.setItem("userEmail", data.email); // guardar email en localStorage
-        window.location.href = "/dashboard"; // redirigir al usuario al Dashboard
+        localStorage.setItem("userName", data.name);
+        window.location.href = "/personal-dashboard"; // redirigir al usuario al Dashboard
       } else {
         console.error(`Error en el login: ${data.error}`);
         alert(`Fallo en el login: ${data.error}`);

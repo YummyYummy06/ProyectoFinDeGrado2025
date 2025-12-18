@@ -69,7 +69,11 @@ app.put('/edit-class/:id', handleClase.editarClase);
 
 app.post('/apuntarse-clase', apuntarse.apuntarseAunaClase);
 
+app.post('/cancelar-clase', apuntarse.cancelarClase);
+
 app.delete('/delete-class/:id', handleClase.deleteClase);
+
+
 
 // Taquilla
 

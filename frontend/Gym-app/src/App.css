@@ -172,6 +172,33 @@ body {
 .unauthorized-message {
   height: 66vh;
 }
+.caja-dosColumnas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.columna-11 {
+  width: auto;
+  margin-left: 50px;
+}
+.columna-12 {
+  width: 50%;
+}
+.columna-11,
+.columna-12 {
+  height: 100%;
+}
+.titulo-lista {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: #f4c430;
+}
+.grid-clases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+
+  text-align: center;
+}
 
 .content {
   text-align: center;
@@ -184,6 +211,12 @@ body {
 .content-Register,
 .content-Login {
   padding-top: 20px;
+}
+
+.caja-dosColumnas {
+  border: #e6a017 solid 2px;
+  height: 100%;
+  width: 100%;
 }
 
 .encabezado,
@@ -481,7 +514,11 @@ body {
   color: #f4c430;
   margin-top: clamp(10px, 2vw, 15px);
 }
-
+.cadaClase {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 20px;
+}
 .class-card,
 .taquilla-card {
   margin-inline: clamp(100px, 5vw, 300px);
@@ -492,7 +529,8 @@ body {
 }
 
 .class-card:hover,
-.taquilla-card:hover {
+.taquilla-card:hover,
+.cadaClase:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

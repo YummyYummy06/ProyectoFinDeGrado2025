@@ -5,6 +5,7 @@ import Register from "./Pages/Register.jsx";
 import LogIn from "./Pages/LogIn.jsx";
 import Contact from "./Pages/Contact.jsx";
 import Dashboard from "./Pages/Dasboard.jsx";
+import PersonalDashboard from "./Pages/Personal-Dashboard.jsx";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
         <Route path="/login" element={<LogIn />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route
+          path="/personal-dashboard"
+          element={<PersonalDashboard />}
+        ></Route>
       </Routes>
     </>
   );
