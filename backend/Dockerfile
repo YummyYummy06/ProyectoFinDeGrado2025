@@ -1,17 +1,26 @@
-FROM node:20-alpine
-
+# ---------- deps ----------
+FROM node:20-alpine AS deps
 WORKDIR /app
-
-# Copiamos dependencias
 COPY package*.json ./
-RUN npm install
+RUN npm install --omit=dev
 
-# Copiamos el resto del proyecto (incluye prisma/)
+# ---------- build ----------
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Generamos Prisma DENTRO del contenedor
 RUN npx prisma generate
 
-EXPOSE 3000
+# ---------- run ----------
+FROM node:20-alpine
+WORKDIR /app
 
+ENV NODE_ENV=production
+
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/Server.js ./Server.js
+# copia aquí SOLO lo que tu app necesita
+
+EXPOSE 3000
 CMD ["node", "Server.js"]
