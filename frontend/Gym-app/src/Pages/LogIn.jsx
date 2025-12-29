@@ -40,13 +40,11 @@ function LogIn() {
       <div id="LogInPage">
         <header className="header-app">
           <div className="logo-titulo">
-            <a href="http://localhost:5173/">
+            <Link to="/">
               <img className="header-logo" src="icon2.png" alt="Logo" />
-            </a>
+            </Link>
             <h1 className="header-titulo">
-              <a href="http://localhost:5173/">
-                - The Club - Boxing Studio Marbella -
-              </a>
+              <Link to="/">- The Club - Boxing Studio Marbella -</Link>
             </h1>
           </div>
           {/* Botón hamburguesa (solo aparece en móvil) */}
