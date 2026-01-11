@@ -195,6 +195,9 @@ function PersonalDashboard() {
                 </div>
                 <div className="columna-12">
                   <h2 className="titulo-dashboard">Clases disponibles</h2>
+                  <p className="texto">
+                    Haz click en las clases que elijas para inscribirte
+                  </p>
                   <div className="grid-clases">
                     {clases.map((cls) => (
                       <div

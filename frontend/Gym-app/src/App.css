@@ -60,6 +60,10 @@ body {
 .logo-titulo h1 {
   margin-left: 2rem;
 }
+.texto {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: clamp(10px, 2vw, 20px);
+}
 
 .header-app {
   display: flex;
@@ -573,6 +577,8 @@ body {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 20px;
+  border: solid white 1px;
+  border-radius: 30px;
 }
 .class-card,
 .taquilla-card {
@@ -588,6 +594,7 @@ body {
 .cadaClase:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: #ffffff 0px 0px 15px;
 }
 .datos-clases strong {
   color: blueviolet;
