@@ -86,13 +86,4 @@ app.put('/taquilla-cancelarReserva', handleTaquilla.cancelarReserva);
 app.post('/taquilla-get-mine', verifyToken, handleTaquilla.verMiTaquilla);
 
 
-// Para evitar que el servidor se levante cuando se ejecuten los test
-
-if (process.env.NODE_ENV !== "test") {
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
-
-
 export default app;
