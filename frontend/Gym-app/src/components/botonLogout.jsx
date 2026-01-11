@@ -4,10 +4,10 @@ import { useState } from "react";
 import "../App.css";
 
 function LogOutButton() {
-  const PORT = import.meta.env.VITE_PORT;
+  const API_URL = import.meta.env.VITE_URL_FETCH;
 
   const handleLogout = () => {
-    fetch(`http://localhost:${PORT}/user-logout`, {
+    fetch(`${API_URL}/user-logout`, {
       method: "POST",
       credentials: "include",
     })

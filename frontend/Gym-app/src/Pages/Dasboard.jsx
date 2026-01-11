@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 
 function Dashboard() {
-  const PORT = import.meta.env.VITE_PORT;
+  const API_URL = import.meta.env.VITE_URL_FETCH;
   const [clases, setClases] = useState([]);
   const [loading, setLoading] = useState(true);
   const [unauthorized, setUnauthorized] = useState(false);
@@ -17,7 +17,7 @@ function Dashboard() {
   const [open, setOpen] = useState(false);
 
   const loadTaquillas = () => {
-    fetch(`http://localhost:${PORT}/get-taquillas`, {
+    fetch(`${API_URL}/get-taquillas`, {
       method: "GET",
       credentials: "include",
     })
@@ -41,7 +41,7 @@ function Dashboard() {
       });
   };
   const loadClases = () => {
-    fetch(`http://localhost:${PORT}/get-class`, {
+    fetch(`${API_URL}/get-class`, {
       method: "GET",
       credentials: "include",
     })
@@ -66,7 +66,7 @@ function Dashboard() {
   };
   const reservarClase = async (cls) => {
     try {
-      const res = await fetch(`http://localhost:${PORT}/apuntarse-clase`, {
+      const res = await fetch(`${API_URL}/apuntarse-clase`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -86,7 +86,7 @@ function Dashboard() {
 
   const verMisClases = async () => {
     try {
-      const res = await fetch(`http://localhost:${PORT}/get-my-classes`, {
+      const res = await fetch(`${API_URL}/get-my-classes`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -106,7 +106,7 @@ function Dashboard() {
 
   const reservarTaquilla = async (taquilla) => {
     try {
-      const res = await fetch(`http://localhost:${PORT}/taquilla-reservar`, {
+      const res = await fetch(`${API_URL}/taquilla-reservar`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -126,7 +126,7 @@ function Dashboard() {
   };
   const verMiTaquilla = async () => {
     try {
-      const res = await fetch(`http://localhost:${PORT}/taquilla-get-mine`, {
+      const res = await fetch(`${API_URL}/taquilla-get-mine`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

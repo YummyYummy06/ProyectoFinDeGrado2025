@@ -13,7 +13,7 @@ function PersonalDashboard() {
   const [misClases, setMisClases] = useState([]);
   const [unauthorized, setUnauthorized] = useState(false);
 
-  const PORT = import.meta.env.VITE_PORT;
+  const API_URL = import.meta.env.VITE_URL_FETCH;
 
   // Para transformar fecha y hora en algo mas legible
   const soloFecha = (date) => {
@@ -26,7 +26,7 @@ function PersonalDashboard() {
   };
   const reservarClase = async (cls) => {
     try {
-      const res = await fetch(`http://localhost:${PORT}/apuntarse-clase`, {
+      const res = await fetch(`${API_URL}/apuntarse-clase`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -46,7 +46,7 @@ function PersonalDashboard() {
   };
   const cancelarClase = async (mcls) => {
     try {
-      const res = await fetch(`http://localhost:${PORT}/cancelar-clase`, {
+      const res = await fetch(`${API_URL}/cancelar-clase`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -57,13 +57,10 @@ function PersonalDashboard() {
       if (res.ok) {
         alert(`Has cancelado tu inscripción en la clase: ${mcls.className}`);
         // Recargar las clases apuntadas
-        const response = await fetch(
-          `http://localhost:${PORT}/get-my-classes`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`${API_URL}/get-my-classes`, {
+          method: "GET",
+          credentials: "include",
+        });
         const newData = await response.json();
         setMisClases(newData.clases);
         setMensajeClase(newData.message);
@@ -78,7 +75,7 @@ function PersonalDashboard() {
   useEffect(() => {
     const fetchClases = async () => {
       try {
-        const response = await fetch(`http://localhost:${PORT}/get-class`, {
+        const response = await fetch(`${API_URL}/get-class`, {
           method: "GET",
           credentials: "include",
         });
@@ -93,13 +90,10 @@ function PersonalDashboard() {
     };
     const fetchMisClases = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:${PORT}/get-my-classes`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`${API_URL}/get-my-classes`, {
+          method: "GET",
+          credentials: "include",
+        });
         const data = await response.json();
         setMisClases(data.clases);
         setMensajeClase(data.message);

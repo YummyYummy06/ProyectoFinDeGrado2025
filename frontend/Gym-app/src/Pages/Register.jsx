@@ -3,7 +3,7 @@ import { useState } from "react";
 import "../App.css";
 
 function Register() {
-  const PORT = import.meta.env.VITE_PORT;
+  const API_URL = import.meta.env.VITE_URL_FETCH;
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,14 +11,11 @@ function Register() {
 
   const handleClick = async () => {
     try {
-      const respuesta = await fetch(
-        `https://theclub-boxingstudio.vercel.app/user-register`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password, username }),
-        }
-      );
+      const respuesta = await fetch(`${API_URL}/user-register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, username }),
+      });
       const data = await respuesta.json();
       console.log("El servidor te manda esta respuesta:", data);
       if (respuesta.ok) {

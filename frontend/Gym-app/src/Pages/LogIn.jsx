@@ -4,7 +4,7 @@ import { useState } from "react";
 import "../App.css";
 
 function LogIn() {
-  const PORT = import.meta.env.VITE_PORT;
+  const API_URL = import.meta.env.VITE_URL_FETCH;
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +12,7 @@ function LogIn() {
 
   const handleClick = async () => {
     try {
-      const respuesta = await fetch(`http://localhost:${PORT}/user-login`, {
+      const respuesta = await fetch(`${API_URL}/user-login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
