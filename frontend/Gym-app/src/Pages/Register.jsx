@@ -11,11 +11,14 @@ function Register() {
 
   const handleClick = async () => {
     try {
-      const respuesta = await fetch(`http://localhost:${PORT}/user-register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, username }),
-      });
+      const respuesta = await fetch(
+        `https://theclub-boxingstudio.vercel.app/user-register`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password, username }),
+        }
+      );
       const data = await respuesta.json();
       console.log("El servidor te manda esta respuesta:", data);
       if (respuesta.ok) {
