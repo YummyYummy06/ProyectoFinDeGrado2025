@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../Server.js";
-import { prisma } from "../src/components/Clase.js";
+import { prisma } from "../lib/prisma.js";
 import { expect, jest } from "@jest/globals";
 
 jest.setTimeout(300000);
@@ -108,7 +108,6 @@ describe("Test de integración para clases", () => {
     //------------- POST /apuntarse-clase -----------------
 
     test("POST /apuntarse-clase añade a la tabla user_clase un usuario y devuelve 201", async () => {
-
 
 
         //Importante pasar los datos correctamente aqui hemos fallado varias veces

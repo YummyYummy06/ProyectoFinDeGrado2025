@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../Server.js";
-import { prisma } from "../src/components/Usuario.js";
+import { prisma } from "../lib/prisma.js";
 import bcrypt from "bcrypt";
 import { expect, jest } from "@jest/globals";
 

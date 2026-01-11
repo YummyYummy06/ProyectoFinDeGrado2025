@@ -59,7 +59,7 @@ app.delete('/user-delete-all', handleUsuario.eliminarTodosUsuarios);
 
 // Clase
 
-app.get('/get-class', verifyToken, handleClase.verClases);
+app.get('/get-class', handleClase.verClases);
 
 app.get('/get-my-classes', verifyToken, apuntarse.verClasesApuntadas);
 
