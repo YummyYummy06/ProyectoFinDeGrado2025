@@ -23,11 +23,13 @@ const PORT = process.env.PORT || 3000;
 
 
 
-//Middleware
+// Middleware
 app.use(cors({
-    origin: "https://frontendtheclub.vercel.app/",
+    origin: "https://frontendtheclub.vercel.app", // Sin la "/" al final
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
-}))
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/", googleAuthRoutes);
