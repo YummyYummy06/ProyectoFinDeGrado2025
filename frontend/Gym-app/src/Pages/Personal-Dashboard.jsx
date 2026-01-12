@@ -10,6 +10,7 @@ function PersonalDashboard() {
   const email = localStorage.getItem("userEmail");
   const [clases, setClases] = useState([]);
   const [mensajeClase, setMensajeClase] = useState("");
+  const [mensajeTaquilla, setMensajeTaquilla] = useState("");
   const [misClases, setMisClases] = useState([]);
   const [unauthorized, setUnauthorized] = useState(false);
 
@@ -72,6 +73,73 @@ function PersonalDashboard() {
     }
   };
 
+  // Cargar taquillas disponibles
+  const [taquillas, setTaquillas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const loadTaquillas = () => {
+    fetch(`${API_URL}/get-taquillas`, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          setUnauthorized(true);
+          setLoading(false);
+          return;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          setTaquillas(data);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error(err, `Error al obtener taquillas disponibles`);
+        setLoading(false);
+      });
+  };
+  const reservarTaquilla = async (taquilla) => {
+    try {
+      const res = await fetch(`${API_URL}/taquilla-reservar`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, id_taquilla: taquilla.id }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert(`Taquilla reservada con éxito: ${data.message}`);
+        loadTaquillas(); // Recargar taquillas para mostrar cambios
+      } else {
+        alert(`Error al reservar taquilla: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Error en el servidor", error);
+      alert("Error en el servidor", error);
+    }
+  };
+  const verMiTaquilla = async () => {
+    try {
+      const res = await fetch(`${API_URL}/taquilla-get-mine`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMensajeTaquilla(data.message);
+      } else {
+        alert(`Error al ver tu taquilla: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Error en el servidor", error);
+      alert("Error en el servidor", error);
+    }
+  };
+
   useEffect(() => {
     const fetchClases = async () => {
       try {
@@ -105,8 +173,8 @@ function PersonalDashboard() {
       }
     };
     fetchMisClases();
-
     fetchClases();
+    loadTaquillas();
   }, []);
 
   return (
@@ -148,13 +216,12 @@ function PersonalDashboard() {
         <div className="content">
           {unauthorized ? (
             <div className="unauthorized-message">
-              <h2 className="encabezado">Acceso no permitido</h2>
+              <h2 className="encabezado">Access Denied</h2>
               <p className="description-1">
-                No tienes autorización para acceder a esta página. Por favor,
-                inicia sesión.
+                You dont have permission to access this page. Please log in.
               </p>
               <Link to="/logIn">
-                <button className="btn-login">Ir al Login</button>
+                <button className="btn-login">Return to Login</button>
               </Link>
             </div>
           ) : (
@@ -163,17 +230,16 @@ function PersonalDashboard() {
               <div className="caja-dosColumnas">
                 <div className="columna-11">
                   <h2 className="titulo-dashboard">
-                    ¡ Bienvenido <span className="nombre-usuario">{name}</span>{" "}
-                    !
+                    ¡ Welcome <span className="nombre-usuario">{name}</span> !
                   </h2>
-                  <h3 className="mensaje-clase">- Tus Próximas clases -</h3>
+                  <h3 className="mensaje-clase">- Your Next Classes -</h3>
                   <div className="grid-misClases">
                     <p className="mensaje-clase">{mensajeClase}</p>
                     {misClases.map((mcls) => (
                       <div className="cadaClase" key={mcls.id}>
                         <h3 className="titulo-lista">{mcls.className}</h3>
                         <p className="datos-lista">
-                          Fecha:{soloFecha(mcls.time)}
+                          Date:{soloFecha(mcls.time)}
                         </p>
                         <button
                           className="btn-cancelar"
@@ -181,16 +247,16 @@ function PersonalDashboard() {
                             cancelarClase(mcls);
                           }}
                         >
-                          Cancelar inscripción
+                          Cancel Class
                         </button>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="columna-12">
-                  <h2 className="titulo-dashboard">Clases disponibles</h2>
+                  <h2 className="titulo-dashboard">Available classes</h2>
                   <p className="texto">
-                    Haz click en las clases que elijas para inscribirte
+                    Click on the classes you want to register
                   </p>
                   <div className="grid-clases">
                     {clases.map((cls) => (
@@ -203,17 +269,45 @@ function PersonalDashboard() {
                       >
                         <h3 className="titulo-lista">{cls.name}</h3>
                         <p className="datos-lista">
-                          Fecha:{soloFecha(cls.date)}
+                          Date:{soloFecha(cls.date)}
                         </p>
                         <p className="datos-lista">
                           Horario: {soloHora(cls.startTime)} -{" "}
                           {soloHora(cls.endTime)}
                         </p>
-                        <p className="datos-lista">Aforo:{cls.aforo}</p>
+                        <p className="datos-lista">Capacity:{cls.aforo}</p>
                       </div>
                     ))}
                   </div>
                 </div>
+              </div>
+              <div className="columnas-dashboard">
+                <h2 className="titulo-dashboard">Available Lockers</h2>
+                <div className="grid-misClases">
+                  {taquillas.map((taquilla) => (
+                    <div
+                      key={taquilla.id}
+                      className="taquilla-card"
+                      onClick={() => {
+                        reservarTaquilla(taquilla);
+                      }}
+                    >
+                      <h3 className="nombre-clase">
+                        {" "}
+                        Nº de taquilla: {taquilla.id}
+                      </h3>
+                      <p className="datos-clases">
+                        <strong>Ocupada:</strong>{" "}
+                        {taquilla.Ocupada ? "Sí" : "No"}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <h2 className="mensaje-clase">Wich is my Locker?</h2>
+                <button className="btn-taquilla" onClick={verMiTaquilla}>
+                  View My Locker
+                </button>
+                <p>{mensajeTaquilla}</p>
               </div>
               <LogOutButton />
             </>
