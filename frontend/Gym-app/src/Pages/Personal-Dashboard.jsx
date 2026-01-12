@@ -304,7 +304,7 @@ function PersonalDashboard() {
                 <button className="btn-taquilla" onClick={verMiTaquilla}>
                   View My Locker
                 </button>
-                <p>{mensajeTaquilla}</p>
+                <p className="titulo-lista">{mensajeTaquilla}</p>
               </div>
               <LogOutButton />
             </>
