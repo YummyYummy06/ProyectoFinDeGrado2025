@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3000;
 
 //Middleware
 app.use(cors({
-    origin: "https://theclub-boxingstudio.vercel.app/",
+    origin: "https://frontendtheclub.vercel.app/",
     credentials: true,
 }))
 app.use(express.json());
