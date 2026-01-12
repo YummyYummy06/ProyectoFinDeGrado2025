@@ -189,17 +189,18 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 50px;
+  gap: clamp(20px, 4vw, 40px);
+  width: 100%;
+  height: auto;
 }
 .columna-11 {
   width: auto;
   margin-left: 50px;
+  height: auto;
 }
 .columna-12 {
   width: 50%;
-}
-.columna-11,
-.columna-12 {
-  height: 100%;
+  height: auto;
 }
 .titulo-lista {
   font-size: clamp(1.5rem, 4vw, 2rem);
@@ -588,6 +589,8 @@ body {
   padding: 20px;
   border: solid white 1px;
   border-radius: 30px;
+  min-width: 150px;
+  width: 100%;
 }
 .class-card,
 .taquilla-card {
@@ -753,6 +756,45 @@ body {
   .columnas-Inputs input {
     width: 90%;
   }
+
+  /* Personal Dashboard responsive */
+  .caja-dosColumnas {
+    flex-direction: column;
+    padding: clamp(15px, 3vw, 25px);
+    gap: clamp(15px, 3vw, 25px);
+  }
+
+  .columna-11,
+  .columna-12 {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .grid-clases,
+  .grid-misClases {
+    grid-template-columns: 1fr;
+  }
+
+  .taquillas-flex {
+    gap: clamp(12px, 2vw, 15px);
+    margin-inline: clamp(10px, 2vw, 15px);
+  }
+
+  .columnas-dashboard {
+    padding: clamp(10px, 2vw, 20px);
+  }
+
+  .titulo-dashboard {
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    margin-bottom: clamp(15px, 3vw, 25px);
+  }
+
+  .btn-cancelar,
+  .btn-taquilla {
+    padding: clamp(8px, 1.5vw, 12px);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    width: 85%;
+  }
 }
 
 /* Tablets - 801px a 1024px */
@@ -867,6 +909,51 @@ body {
   .imagenColumna2 {
     height: clamp(130px, 30vh, 240px);
   }
+
+  /* Estilos para Personal Dashboard en tablets */
+  .caja-dosColumnas {
+    flex-direction: column;
+    padding: clamp(20px, 4vw, 40px);
+    gap: clamp(20px, 4vw, 30px);
+  }
+
+  .columna-11,
+  .columna-12 {
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+  }
+
+  .grid-clases,
+  .grid-misClases {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .taquillas-flex {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: grid;
+  }
+
+  .taquilla-card,
+  .class-card {
+    margin-inline: 0;
+  }
+
+  .columnas-dashboard {
+    width: 100%;
+    padding: clamp(15px, 3vw, 25px);
+  }
+
+  .titulo-dashboard {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+  }
+
+  .btn-cancelar,
+  .btn-taquilla {
+    padding: clamp(10px, 2vw, 15px);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    width: 80%;
+  }
 }
 
 /* Pantallas pequeñas - menos de 600px */
@@ -976,6 +1063,89 @@ body {
   .bttop {
     padding: clamp(10px, 1.5vw, 16px);
     font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  }
+
+  /* Estilos para Personal Dashboard en móvil */
+  .caja-dosColumnas {
+    flex-direction: column;
+    padding: clamp(10px, 3vw, 20px);
+    gap: clamp(20px, 5vw, 30px);
+  }
+
+  .columna-11,
+  .columna-12 {
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+  }
+
+  .grid-clases,
+  .grid-misClases {
+    grid-template-columns: 1fr;
+  }
+
+  .cadaClase {
+    padding: clamp(15px, 3vw, 20px);
+    border-radius: clamp(15px, 4vw, 30px);
+  }
+
+  .taquillas-flex {
+    flex-direction: column;
+    gap: clamp(15px, 3vw, 20px);
+    margin-inline: clamp(5px, 2vw, 10px);
+  }
+
+  .taquilla-card,
+  .class-card {
+    margin-inline: 0;
+    width: 100%;
+    max-width: calc(100vw - 20px);
+  }
+
+  .columnas-dashboard {
+    width: 100%;
+    padding: clamp(10px, 3vw, 20px);
+  }
+
+  .titulo-dashboard {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .titulo-lista {
+    font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  }
+
+  .mensaje-clase {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+  }
+
+  .datos-lista {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+  }
+
+  .datos-clases {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+  }
+
+  .btn-cancelar,
+  .btn-taquilla {
+    padding: clamp(8px, 2vw, 12px);
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    width: 90%;
+    margin-top: clamp(10px, 2vw, 15px);
+  }
+
+  .nombre-usuario {
+    display: block;
+    margin-top: clamp(10px, 2vw, 15px);
+  }
+
+  .content {
+    padding: clamp(10px, 2vw, 15px);
+  }
+
+  #personalDashboard {
+    width: 100%;
   }
 }
 
