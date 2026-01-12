@@ -284,6 +284,15 @@ body {
   margin-bottom: 40px;
 }
 
+.taquillas-flex {
+  display: flex;
+  flex-wrap: wrap; /* Permite que bajen a otra fila */
+  gap: 20px; /* Espacio entre columnas */
+  align-items: center;
+  justify-content: center; /* Centra incluso cuando hay 1 o 2 columnas */
+  margin-inline: 20px; /* Márgenes más pequeños en móviles */
+}
+
 .tresColumnas {
   display: flex;
   flex-wrap: wrap; /* Permite que bajen a otra fila */

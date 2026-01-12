@@ -283,22 +283,19 @@ function PersonalDashboard() {
               </div>
               <div className="columnas-dashboard">
                 <h2 className="titulo-dashboard">Available Lockers</h2>
-                <div className="grid-misClases">
+                <div className="taquillas-flex">
                   {taquillas.map((taquilla) => (
                     <div
                       key={taquilla.id}
-                      className="taquilla-card"
+                      className="cadaClase"
                       onClick={() => {
                         reservarTaquilla(taquilla);
                       }}
                     >
-                      <h3 className="nombre-clase">
-                        {" "}
-                        Nº de taquilla: {taquilla.id}
-                      </h3>
+                      <h3 className="titulo-lista">Locker nº: {taquilla.id}</h3>
                       <p className="datos-clases">
-                        <strong>Ocupada:</strong>{" "}
-                        {taquilla.Ocupada ? "Sí" : "No"}
+                        <strong>Available:</strong>{" "}
+                        {taquilla.Ocupada ? "No" : "Yes"}
                       </p>
                     </div>
                   ))}
