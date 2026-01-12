@@ -7,7 +7,7 @@
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "dev": "nodemon dev.js",
-    "build": "prisma generate"
+    "build": "prisma generate --schema=./backend/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
